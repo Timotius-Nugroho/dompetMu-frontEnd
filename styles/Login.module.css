@@ -1,0 +1,68 @@
+.containerCard {
+  width: 18rem;
+  text-align: left;
+  padding: 15px;
+  margin: 20px auto;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 33px;
+}
+
+.semi {
+  font-size: 16px;
+  line-height: 30px;
+  color: rgba(58, 61, 66, 0.6);
+}
+
+.input {
+  border: none;
+  background-color: white;
+  border-bottom: 2px solid rgba(169, 169, 169, 0.6);
+}
+
+.input:focus {
+  box-shadow: none;
+  border: none;
+  border-bottom: 2px solid rgba(169, 169, 169, 0.6);
+}
+
+.forgot {
+  text-align: end;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.forgot:hover {
+  font-weight: bold;
+}
+
+.btn {
+  height: 50px;
+  border-radius: 15px;
+  background-color: rgba(100, 87, 87, 0.3);
+  color: rgba(136, 136, 143, 1);
+  font-weight: bold;
+  border: none;
+}
+
+.btn:hover {
+  background-color: rgba(100, 87, 87, 0.3);
+  height: 52px;
+}
+
+.signUp {
+  cursor: pointer;
+  color: rgba(99, 121, 244, 1);
+  font-weight: 600;
+}
+
+.signUp:hover {
+  font-weight: bold;
+}
+
+.banner {
+  width: 60%;
+}
