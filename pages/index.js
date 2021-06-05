@@ -43,39 +43,3 @@ export default function Home(props) {
     </Layout>
   );
 }
-
-// export default function Home() {
-//   const [users, setUsers] = useState([]);
-
-//   useEffect(() => {
-//     console.log("Get Data !");
-//     getUsers();
-//   }, []);
-
-//   const getUsers = () => {
-//     axiosApiIntances
-//       .get("users")
-//       .then((res) => {
-//         console.log(res.data);
-//         setUsers(res.data);
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   };
-
-//   return (
-//     <Layout title="Home">
-//       <Navbar />
-//       <h1 className={styles.titleHead}>Home Page</h1>
-//       <h2>{process.env.APP_NAME}</h2>
-//       {users.map((item, index) => (
-//         <div className="d-grid gap-2" key={index}>
-//           <button className="btn btn-primary" type="button">
-//             {item.name}
-//           </button>
-//         </div>
-//       ))}
-//     </Layout>
-//   );
-// }
