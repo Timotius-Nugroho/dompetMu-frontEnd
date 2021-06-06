@@ -1,0 +1,13 @@
+.boxNav {
+  border-radius: 10px;
+}
+
+.navText {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.selectedNav {
+  border-bottom: 3px solid #6379f4;
+  color: #6379f4;
+}

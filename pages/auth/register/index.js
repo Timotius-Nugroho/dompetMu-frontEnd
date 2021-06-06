@@ -1,35 +1,53 @@
 import { useState } from "react";
-// import { useRouter } from "next/router";
-// import Cookie from "js-cookie";
+import { useRouter } from "next/router";
+import axiosApiIntances from "../../../utils/axios";
 import Image from "next/image";
 import Layout from "../../../components/Layout";
 import styles from "../../../styles/Register.module.css";
-// import { unauthPage } from "../../../middleware/authorizationPage";
+import { unauthPage } from "../../../middleware/authorizationPage";
 
-// export async function getServerSideProps(context) {
-//   await unauthPage(context);
-//   return { props: {} };
-// }
+export async function getServerSideProps(context) {
+  await unauthPage(context);
+  return { props: {} };
+}
 
 export default function Register() {
-  // const router = useRouter();
+  const router = useRouter();
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
     userEmail: "",
-    userPasword: "",
+    userPhone: "",
+    userPassword: "",
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [showAlert, setShowAlert] = useState([false, ""]);
 
   const handleRegister = (event) => {
     event.preventDefault();
-    // proses axios di dalam .then
-    // Cookie.set("token", "TestingToken", { expires: 1, secure: true }); // kadaluarsa 1 hari
-    // Cookie.set("user", 1, { expires: 1, secure: true });
-    // router.push("/");
+    axiosApiIntances
+      .post("auth/register", {
+        userName: form.firstName + " " + form.lastName,
+        userEmail: form.userEmail,
+        userPhone: form.userPhone,
+        userPassword: form.userPassword,
+      })
+      .then((res) => {
+        // console.log("axios", res);
+        setShowAlert([true, res.data.msg]);
+        setTimeout(() => {
+          setShowAlert([false, ""]);
+          router.push("/login");
+        }, 2000);
+      })
+      .catch((error) => {
+        // console.log("errr", error.response.data.msg);
+        setShowAlert([true, error.response.data.msg]);
+        setTimeout(() => {
+          setShowAlert([false, ""]);
+        }, 3000);
+      });
   };
-
-  // console.log("form", form);
 
   return (
     <Layout title="Register">
@@ -145,6 +163,31 @@ export default function Register() {
                   />
                 </div>
               </div>
+              <div className="mb-5 pt-1">
+                <div className="input-group">
+                  <span
+                    id="basic-addon2"
+                    className={`${styles.input} input-group-text`}
+                  >
+                    <i
+                      className="bi bi-telephone"
+                      style={{ color: "grey" }}
+                    ></i>
+                  </span>
+                  <input
+                    type="text"
+                    placeholder="Enter your phone number"
+                    className={`${styles.input} form-control`}
+                    onChange={(event) => {
+                      setForm({
+                        ...form,
+                        ...{ userPhone: event.target.value },
+                      });
+                    }}
+                    required
+                  />
+                </div>
+              </div>
               <div className="mb-3 pt-1">
                 <div className="input-group">
                   <span
@@ -161,7 +204,7 @@ export default function Register() {
                     onChange={(event) => {
                       setForm({
                         ...form,
-                        ...{ userPasword: event.target.value },
+                        ...{ userPassword: event.target.value },
                       });
                     }}
                     required
@@ -182,7 +225,13 @@ export default function Register() {
                   </span>
                 </div>
               </div>
-              <p className={styles.forgot}>Forgot password?</p>
+              {showAlert[0] ? (
+                <div className="alert alert-warning text-center" role="alert">
+                  {showAlert[1]}
+                </div>
+              ) : (
+                ""
+              )}
               <div className="d-grid gap-2 mt-3 pt-5">
                 <button
                   type="submit"

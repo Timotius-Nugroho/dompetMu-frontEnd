@@ -1,33 +1,48 @@
 import { useState } from "react";
-// import { useRouter } from "next/router";
-// import Cookie from "js-cookie";
+import { useRouter } from "next/router";
+import Cookie from "js-cookie";
+import axiosApiIntances from "../../../utils/axios";
 import Image from "next/image";
 import Layout from "../../../components/Layout";
 import styles from "../../../styles/AddPin.module.css";
-// import { unauthPage } from "../../../middleware/authorizationPage";
+import { unauthPage } from "../../../middleware/authorizationPage";
 
-// export async function getServerSideProps(context) {
-//   await unauthPage(context);
-//   return { props: {} };
-// }
+export async function getServerSideProps(context) {
+  await unauthPage(context);
+  return { props: {} };
+}
 
-export default function AddPin() {
-  // const router = useRouter();
+export default function AddPin(props) {
+  const router = useRouter();
   const [one, setOne] = useState("");
   const [two, setTwo] = useState("");
   const [three, setThree] = useState("");
   const [four, setFour] = useState("");
   const [five, setFive] = useState("");
   const [six, setSix] = useState("");
+  const [showAlert, setShowAlert] = useState([false, ""]);
 
   const handleAddPin = (event) => {
     event.preventDefault();
-    const setPin = parseInt(one + two + three + four + five + six);
-    console.log("PIN", setPin);
-    // proses axios di dalam .then
-    // Cookie.set("token", "TestingToken", { expires: 1, secure: true }); // kadaluarsa 1 hari
-    // Cookie.set("user", 1, { expires: 1, secure: true });
-    // router.push("/");
+    const setPin = one + two + three + four + five + six;
+
+    axiosApiIntances
+      .patch("user/update-pin", { newPin: setPin })
+      .then((res) => {
+        // console.log("axios", res);
+        setShowAlert([true, res.data.msg]);
+        setTimeout(() => {
+          setShowAlert([false, ""]);
+          router.push("/");
+        }, 2000);
+      })
+      .catch((error) => {
+        // console.log("errr", error.response.data.msg);
+        setShowAlert([true, error.response.data.msg]);
+        setTimeout(() => {
+          setShowAlert([false, ""]);
+        }, 3000);
+      });
   };
 
   return (
@@ -138,6 +153,16 @@ export default function AddPin() {
                   />
                 </div>
               </div>
+              {showAlert[0] ? (
+                <div
+                  className="alert alert-warning text-center m-3"
+                  role="alert"
+                >
+                  {showAlert[1]}
+                </div>
+              ) : (
+                ""
+              )}
               <div className="d-grid gap-2 mt-5 pt-2">
                 <button
                   type="submit"

@@ -1,7 +1,7 @@
 module.exports = {
   env: {
     APP_NAME: "DompetMu",
-    BASE_URL: "http://localhost:3004/backend4/api/v1",
+    NEXT_PUBLIC_BACKEND_URL: "http://localhost:3004/backend4/api/v1/",
   },
   async rewrites() {
     return [
@@ -12,6 +12,10 @@ module.exports = {
       {
         source: "/register", // sebagai pengganti path
         destination: "/auth/register", // sebagai lokasi asli
+      },
+      {
+        source: "/addpin", // sebagai pengganti path
+        destination: "/auth/addpin", // sebagai lokasi asli
       },
     ];
   },

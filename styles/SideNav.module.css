@@ -1,0 +1,30 @@
+.box {
+  width: 230px;
+  height: 545px;
+  border-radius: 12px;
+  position: relative;
+}
+
+.sideNav {
+  color: rgba(58, 61, 66, 0.8);
+  font-size: 18px;
+  line-height: 31px;
+}
+
+.sideNav:hover {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.selectedNav {
+  border-left: solid 5px;
+  border-color: #6379f4;
+  color: #6379f4 !important;
+}
+
+.logout {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-bottom: 20px;
+}

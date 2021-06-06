@@ -1,3 +1,95 @@
-.titleHead {
-  color: brown;
+.boxBalance {
+  background-color: #6379f4;
+  border-radius: 10px;
+}
+
+.box {
+  border-radius: 10px;
+}
+
+.semi {
+  font-size: 18px;
+  line-height: 31px;
+  color: #e0e0e0;
+}
+
+.miniTitle {
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 25px;
+}
+
+.btnSemi {
+  border-color: #e0e0e0;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 25px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #e0e0e0;
+}
+
+.btnAjust {
+  margin-left: 5px;
+}
+
+.balance {
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 55px;
+  color: white;
+}
+
+.seeAll {
+  color: #6379f4;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pp {
+  width: 46px;
+  height: 46px;
+  border-radius: 5px;
+}
+
+.receiverName {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 25px;
+}
+
+.type {
+  font-size: 14px;
+  color: #7a7886;
+  line-height: 30px;
+}
+
+.value {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.valuePlus {
+  color: green;
+}
+
+.valueMinus {
+  color: red;
+}
+
+@media (min-width: 997.98px) {
+  .breakPoints {
+    display: inline;
+  }
+  .breakPointsRev {
+    display: none;
+  }
+}
+
+@media (max-width: 997px) {
+  .breakPoints {
+    display: none;
+  }
+  .breakPointsRev {
+    display: inline;
+  }
 }

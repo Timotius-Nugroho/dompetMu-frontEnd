@@ -1,30 +1,55 @@
 import { useState } from "react";
-// import { useRouter } from "next/router";
-// import Cookie from "js-cookie";
+import { useRouter } from "next/router";
+import Cookie from "js-cookie";
+import axiosApiIntances from "../../../utils/axios";
 import Image from "next/image";
 import Layout from "../../../components/Layout";
 import styles from "../../../styles/Login.module.css";
-// import { unauthPage } from "../../../middleware/authorizationPage";
+import { unauthPage } from "../../../middleware/authorizationPage";
 
-// export async function getServerSideProps(context) {
-//   await unauthPage(context);
-//   return { props: {} };
-// }
+export async function getServerSideProps(context) {
+  await unauthPage(context);
+  return { props: {} };
+}
 
-export default function Login() {
-  // const router = useRouter();
-  const [form, setForm] = useState({ userEmail: "", userPasword: "" });
+export default function Login(props) {
+  const router = useRouter();
+  const [form, setForm] = useState({ userEmail: "", userPassword: "" });
   const [showPassword, setShowPassword] = useState(false);
+  const [showAlert, setShowAlert] = useState([false, ""]);
 
   const handleLogin = (event) => {
     event.preventDefault();
-    // proses axios di dalam .then
-    // Cookie.set("token", "TestingToken", { expires: 1, secure: true }); // kadaluarsa 1 hari
-    // Cookie.set("user", 1, { expires: 1, secure: true });
-    // router.push("/");
+    axiosApiIntances
+      .post("auth/login", form)
+      .then((res) => {
+        // console.log("axios", res);
+        setShowAlert([true, res.data.msg]);
+        setTimeout(() => {
+          setShowAlert([false, ""]);
+          Cookie.set("token", res.data.data.token, {
+            expires: 1,
+            secure: true,
+          });
+          Cookie.set("user", res.data.data.user_id, {
+            expires: 1,
+            secure: true,
+          });
+          if (res.data.data.user_pin) {
+            router.push("/");
+          } else {
+            router.push("/addpin");
+          }
+        }, 2000);
+      })
+      .catch((error) => {
+        // console.log("errr", error.response.data.msg);
+        setShowAlert([true, error.response.data.msg]);
+        setTimeout(() => {
+          setShowAlert([false, ""]);
+        }, 3000);
+      });
   };
-
-  // console.log(form);
 
   return (
     <Layout title="Login">
@@ -65,6 +90,13 @@ export default function Login() {
               wherever you are. Desktop, laptop, mobile phone? we cover all of
               that for you!
             </p>
+            {showAlert[0] ? (
+              <div className="alert alert-warning text-center" role="alert">
+                {showAlert[1]}
+              </div>
+            ) : (
+              ""
+            )}
             <form onSubmit={handleLogin} className={styles.semi}>
               <div className="mb-5 mt-5 pt-2">
                 <div className="input-group">
@@ -106,7 +138,7 @@ export default function Login() {
                     onChange={(event) => {
                       setForm({
                         ...form,
-                        ...{ userPasword: event.target.value },
+                        ...{ userPassword: event.target.value },
                       });
                     }}
                     required
