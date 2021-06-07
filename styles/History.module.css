@@ -1,0 +1,71 @@
+.box {
+  border-radius: 10px;
+}
+
+.dataBox {
+  border-radius: 8px;
+  /* border: solid; */
+  height: 161px;
+  overflow: auto;
+}
+
+.semi {
+  font-size: 18px;
+  line-height: 31px;
+  color: #7a7886;
+}
+
+.miniTitle {
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 25px;
+}
+
+.pp {
+  width: 46px;
+  height: 46px;
+  border-radius: 5px;
+}
+
+.receiverName {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 25px;
+}
+
+.type {
+  font-size: 14px;
+  color: #7a7886;
+  line-height: 30px;
+}
+
+.value {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.valuePlus {
+  color: green;
+}
+
+.valueMinus {
+  color: red;
+}
+
+@media (min-width: 997.98px) {
+  .breakPoints {
+    display: inline;
+  }
+  .breakPointsRev {
+    display: none;
+  }
+}
+
+@media (max-width: 997px) {
+  .breakPoints {
+    display: none;
+  }
+  .breakPointsRev {
+    display: inline;
+  }
+}
