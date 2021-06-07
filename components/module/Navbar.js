@@ -9,6 +9,7 @@ export default function Navbar(props) {
   const router = useRouter();
   const [userName, setUserName] = useState("");
   const [userPhone, setUserPhone] = useState("");
+  const [userImage, setUserImage] = useState("");
 
   useEffect(() => {
     axiosApiIntances
@@ -17,11 +18,14 @@ export default function Navbar(props) {
         // console.log(res.data.data[0]);
         setUserName(res.data.data[0].user_name);
         setUserPhone(res.data.data[0].user_phone);
+        setUserImage(res.data.data[0].user_image);
       })
       .catch((err) => {
         console.log(err.response.data.msg);
       });
   }, []);
+
+  // console.log(process.env.IMG_BACKEND_URL);
 
   return (
     <>
@@ -35,13 +39,20 @@ export default function Navbar(props) {
           </div>
           <div className="d-flex">
             <div className="p-2">
-              <Image
-                src="/no-img.png"
-                alt="Picture user"
-                width={50}
-                height={50}
-                className={styles.pp}
-              />
+              {userImage ? (
+                <img
+                  src={`${process.env.IMG_BACKEND_URL}${userImage}`}
+                  className={styles.pp}
+                />
+              ) : (
+                <Image
+                  src="/no-img.png"
+                  alt="Picture user"
+                  width={50}
+                  height={50}
+                  className={styles.noPp}
+                />
+              )}
             </div>
             <div className={`p-2 ${styles.breakPoint}`}>
               <p className={styles.userName}>{userName}</p>

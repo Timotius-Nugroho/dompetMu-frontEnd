@@ -58,7 +58,11 @@ export default function Navbar(props) {
           <i className="m-2 bi bi-person" style={{ fontSize: "25px" }}></i>
           <div className={styles.navText}>Profile</div>
         </div>
-        <div className="col text-center" style={{ cursor: "pointer" }}>
+        <div
+          className="col text-center"
+          style={{ cursor: "pointer" }}
+          onClick={handleLogout}
+        >
           <i
             className="m-2 bi bi-box-arrow-right"
             style={{ fontSize: "25px" }}

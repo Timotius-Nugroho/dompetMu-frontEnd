@@ -2,6 +2,7 @@ module.exports = {
   env: {
     APP_NAME: "DompetMu",
     NEXT_PUBLIC_BACKEND_URL: "http://localhost:3004/backend4/api/v1/",
+    IMG_BACKEND_URL: "http://localhost:3004/backend4/api/",
   },
   async rewrites() {
     return [

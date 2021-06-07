@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
 import axiosApiIntances from "../utils/axios";
+import Image from "next/image";
 import Layout from "../components/Layout";
 import Navbar from "../components/module/Navbar";
 import SideNav from "../components/module/SideNav";
@@ -32,14 +32,14 @@ export async function getServerSideProps(context) {
 }
 
 export default function Home(props) {
-  const router = useRouter();
   const userId = Cookie.get("user");
   const [data, setData] = useState([]);
   const [balance, setBalance] = useState("Loading...");
+  const [userPhone, setUserPhone] = useState("");
 
   useEffect(() => {
     axiosApiIntances
-      .get("transaction?sort=month&limit=6")
+      .get("transaction?sort=month&limit=4")
       .then((res) => {
         // console.log(res.data.data);
         setData(res.data.data);
@@ -53,6 +53,15 @@ export default function Home(props) {
       .then((res) => {
         // console.log(res.data.data);
         setBalance(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err.response.data.msg);
+      });
+
+    axiosApiIntances
+      .get(`user/by-id/${Cookie.get("user")}`)
+      .then((res) => {
+        setUserPhone(res.data.data[0].user_phone);
       })
       .catch((err) => {
         console.log(err.response.data.msg);
@@ -77,7 +86,7 @@ export default function Home(props) {
                 <div className="col">
                   <div className={styles.semi}>Balance</div>
                   <div className={`${styles.balance} mb-2`}>Rp{balance}</div>
-                  <div className={styles.semi}>++userphone</div>
+                  <div className={styles.semi}>{userPhone}</div>
                 </div>
                 <div className="col-sm-3">
                   <div className="d-grid gap-2">
@@ -144,15 +153,30 @@ export default function Home(props) {
                             key={index}
                           >
                             <div className="col-2">
-                              <img
-                                src="https://i.redd.it/v0caqchbtn741.jpg"
-                                className={styles.pp}
-                              />
+                              {item.transaction_method ? (
+                                <Image
+                                  src="/topup.png"
+                                  alt="Top up"
+                                  width={46}
+                                  height={46}
+                                />
+                              ) : (
+                                <img
+                                  src={`${process.env.IMG_BACKEND_URL}${
+                                    item.transaction_receiver_id == userId
+                                      ? item.senderDetail.user_image
+                                      : item.receiverDetail.user_image
+                                  }`}
+                                  className={styles.pp}
+                                />
+                              )}
                             </div>
                             <div className="col-6">
                               <div className={`${styles.receiverName} ms-2`}>
-                                {item.transaction_receiver_id == userId
+                                {item.transaction_method
                                   ? "Me"
+                                  : item.transaction_receiver_id == userId
+                                  ? item.senderDetail.user_name
                                   : item.receiverDetail.user_name}
                               </div>
                               <div className={`${styles.type} ms-2`}>
