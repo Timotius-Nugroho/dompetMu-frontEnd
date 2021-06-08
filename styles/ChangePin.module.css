@@ -1,0 +1,65 @@
+.box {
+  border-radius: 10px;
+  height: 458px;
+}
+
+.semi {
+  font-size: 14px;
+  line-height: 31px;
+  color: #7a7886;
+}
+
+.miniTitle {
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 25px;
+}
+
+.input {
+  width: 46px;
+  height: 53px;
+}
+
+.btn {
+  height: 50px;
+  border-radius: 15px;
+  background-color: rgba(100, 87, 87, 0.3);
+  color: rgba(136, 136, 143, 1);
+  font-weight: bold;
+  border: none;
+}
+
+.btn:hover {
+  background-color: rgba(100, 87, 87, 0.3);
+  height: 52px;
+}
+
+@media (min-width: 997.98px) {
+  .breakPoints {
+    display: inline;
+  }
+  .breakPointsRev {
+    display: none;
+  }
+}
+
+@media (max-width: 997px) {
+  .breakPoints {
+    display: none;
+  }
+  .breakPointsRev {
+    display: inline;
+  }
+}
+
+@media (min-width: 769px) {
+  .form {
+    width: 60%;
+  }
+}
+
+@media (max-width: 768.98px) {
+  .form {
+    width: 80%;
+  }
+}

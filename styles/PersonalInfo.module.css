@@ -1,0 +1,64 @@
+.box {
+  border-radius: 10px;
+  height: 544px;
+}
+
+.semi {
+  font-size: 14px;
+  line-height: 31px;
+  color: #7a7886;
+}
+
+.miniTitle {
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 25px;
+}
+
+.info {
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 25px;
+}
+
+.manage {
+  font-size: 14px;
+  font-weight: 600;
+  color: #6379f4;
+}
+
+.type {
+  font-size: 11px;
+  color: #7a7886;
+}
+
+@media (min-width: 997.98px) {
+  .breakPoints {
+    display: inline;
+  }
+  .breakPointsRev {
+    display: none;
+  }
+  .btnCustom {
+    background-color: #e5e8ed;
+    height: 50px;
+    width: 50%;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 997px) {
+  .breakPoints {
+    display: none;
+  }
+  .breakPointsRev {
+    display: inline;
+  }
+  .btnCustom {
+    background-color: #e5e8ed;
+    height: 50px;
+    width: 50%;
+    font-weight: 600;
+    font-size: 12px;
+  }
+}

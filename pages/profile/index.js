@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useRouter } from "next/router";
 import axios from "../../utils/axios";
 import Image from "next/image";
 import Layout from "../../components/Layout";
@@ -30,6 +31,7 @@ export async function getServerSideProps(context) {
 }
 
 export default function History(props) {
+  const router = useRouter();
   const token = Cookie.get("token");
   axios.setToken(token);
   const [user, setUser] = useState(props.user);
@@ -40,9 +42,6 @@ export default function History(props) {
   const [userName, setUserName] = useState(user.user_name);
   const [userPhone, setUserPhone] = useState(user.user_phone);
   const [showAlert, setShowAlert] = useState([false, ""]);
-
-  // useEffect(() => {
-  // }, []);
 
   const handleImage = (event) => {
     // console.log(event.target.files[0]);
@@ -83,6 +82,18 @@ export default function History(props) {
           setShowAlert([false, ""]);
         }, 3000);
       });
+  };
+
+  const goToPersonalInfo = () => {
+    router.push("/personal-info");
+  };
+
+  const goToChangePassword = () => {
+    router.push("/change-password");
+  };
+
+  const goToChangePin = () => {
+    router.push("/change-pin");
   };
 
   const handleDeleteProfile = () => {
@@ -211,6 +222,7 @@ export default function History(props) {
                   <button
                     type="button"
                     className={`${styles.btnCustom} btn mb-2`}
+                    onClick={goToPersonalInfo}
                   >
                     <div className="d-flex justify-content-between">
                       <div>Personal Information</div>
@@ -224,6 +236,7 @@ export default function History(props) {
                   <button
                     type="button"
                     className={`${styles.btnCustom} btn mb-2`}
+                    onClick={goToChangePassword}
                   >
                     <div className="d-flex justify-content-between">
                       <div>Change Password</div>
@@ -237,6 +250,7 @@ export default function History(props) {
                   <button
                     type="button"
                     className={`${styles.btnCustom} btn mb-2`}
+                    onClick={goToChangePin}
                   >
                     <div className="d-flex justify-content-between">
                       <div>Change PIN</div>
