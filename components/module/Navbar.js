@@ -1,31 +1,13 @@
-import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "../../styles/Navbar.module.css";
-import Cookie from "js-cookie";
-import axiosApiIntances from "../../utils/axios";
 
 export default function Navbar(props) {
-  const router = useRouter();
-  const [userName, setUserName] = useState("");
-  const [userPhone, setUserPhone] = useState("");
-  const [userImage, setUserImage] = useState("");
-
-  useEffect(() => {
-    axiosApiIntances
-      .get(`user/by-id/${Cookie.get("user")}`)
-      .then((res) => {
-        // console.log(res.data.data[0]);
-        setUserName(res.data.data[0].user_name);
-        setUserPhone(res.data.data[0].user_phone);
-        setUserImage(res.data.data[0].user_image);
-      })
-      .catch((err) => {
-        console.log(err.response.data.msg);
-      });
-  }, []);
+  const userName = props.user.user_name;
+  const userPhone = props.user.user_phone;
+  const userImage = props.user.user_image;
 
   // console.log(process.env.IMG_BACKEND_URL);
+  // console.log(props.user.user_image);
 
   return (
     <>

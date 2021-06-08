@@ -5,7 +5,7 @@
 
 .resultBox {
   border-radius: 8px;
-  border: solid;
+  /* border: solid; */
   height: 380px;
   overflow: auto;
 }
@@ -13,6 +13,19 @@
 .input {
   border: none;
   background-color: rgba(58, 61, 66, 0.1);
+}
+
+.inputLg {
+  width: 300px;
+  font-weight: bold;
+  font-size: 34px;
+  line-height: 56px;
+  border: none;
+}
+
+.btnContinune {
+  background-color: #6379f4;
+  font-size: 18px;
 }
 
 .semi {
@@ -47,6 +60,11 @@
   font-size: 14px;
   color: #7a7886;
   line-height: 30px;
+}
+
+.alert {
+  color: red;
+  font-size: 10px;
 }
 
 @media (min-width: 997.98px) {

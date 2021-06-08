@@ -1,6 +1,12 @@
 import axios from "axios";
 import Cookie from "js-cookie";
 
+let dataToken = "";
+
+const setToken = (token) => {
+  dataToken = token;
+};
+
 const axiosApiIntances = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
 });
@@ -9,7 +15,7 @@ const axiosApiIntances = axios.create({
 axiosApiIntances.interceptors.request.use(
   function (config) {
     config.headers = {
-      Authorization: `Bearer ${Cookie.get("token")}`,
+      Authorization: `Bearer ${dataToken}`,
     };
     return config;
   },
@@ -24,13 +30,17 @@ axiosApiIntances.interceptors.response.use(
   },
   function (error) {
     if (error.response.status === 403) {
-      Cookie.remove("token");
-      Cookie.remove("user");
-      alert("Please log in !");
-      window.location.href = "/";
+      try {
+        Cookie.remove("token");
+        Cookie.remove("user");
+        alert("Please log in !");
+        window.location.href = "/";
+      } catch (err) {
+        console.log(err.message);
+      }
     }
     return Promise.reject(error);
   }
 );
 
-export default axiosApiIntances;
+export default { axiosApiIntances, setToken };

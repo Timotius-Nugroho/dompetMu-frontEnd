@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
-import axiosApiIntances from "../../../utils/axios";
+import axios from "../../../utils/axios";
 import Image from "next/image";
 import Layout from "../../../components/Layout";
 import styles from "../../../styles/AddPin.module.css";
-import { unauthPage } from "../../../middleware/authorizationPage";
+import { authPage } from "../../../middleware/authorizationPage";
 
 export async function getServerSideProps(context) {
-  await unauthPage(context);
+  await authPage(context);
   return { props: {} };
 }
 
@@ -25,8 +25,9 @@ export default function AddPin(props) {
   const handleAddPin = (event) => {
     event.preventDefault();
     const setPin = one + two + three + four + five + six;
+    axios.setToken(Cookie.get("token"));
 
-    axiosApiIntances
+    axios.axiosApiIntances
       .patch("user/update-pin", { newPin: setPin })
       .then((res) => {
         // console.log("axios", res);

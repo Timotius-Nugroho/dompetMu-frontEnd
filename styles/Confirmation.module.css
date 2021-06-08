@@ -1,0 +1,84 @@
+.box {
+  border-radius: 10px;
+  height: 545px;
+}
+
+.modal {
+  border: solid;
+  border-radius: 8px;
+  background-color: white;
+  z-index: 1060;
+}
+
+.input {
+  width: 46px;
+  height: 53px;
+}
+
+.btnContinune {
+  background-color: #6379f4;
+  font-size: 18px;
+}
+
+.semi {
+  font-size: 18px;
+  line-height: 31px;
+  color: #7a7886;
+}
+
+.miniTitle {
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 25px;
+}
+
+.detail {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.pp {
+  width: 55px;
+  height: 55px;
+  border-radius: 5px;
+}
+
+.noPP {
+  border-radius: 5px;
+}
+
+.receiverName {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 25px;
+}
+
+.type {
+  font-size: 14px;
+  color: #7a7886;
+  line-height: 30px;
+}
+
+.btn {
+  height: 50px;
+  border-radius: 8px;
+  background-color: #6379f4;
+}
+
+@media (min-width: 997.98px) {
+  .breakPoints {
+    display: inline;
+  }
+  .breakPointsRev {
+    display: none;
+  }
+}
+
+@media (max-width: 997px) {
+  .breakPoints {
+    display: none;
+  }
+  .breakPointsRev {
+    display: inline;
+  }
+}

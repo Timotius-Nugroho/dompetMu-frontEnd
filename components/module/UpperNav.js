@@ -1,20 +1,25 @@
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
+import axios from "../../utils/axios";
 import styles from "../../styles/UpperNav.module.css";
-import { useState } from "react";
 
 export default function Navbar(props) {
   const router = useRouter();
 
-  const handleDashboard = () => {};
+  const handleDashboard = () => {
+    router.push("/");
+  };
 
-  const handleTransfer = () => {};
+  const handleTransfer = () => {
+    router.push("/transfer");
+  };
 
   const handleTopUp = () => {};
 
   const handleProfile = () => {};
 
   const handleLogout = () => {
+    axios.setToken("");
     Cookie.remove("token");
     Cookie.remove("user");
     router.push("/login");

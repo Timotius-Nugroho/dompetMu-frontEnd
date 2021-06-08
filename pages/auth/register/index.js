@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import axiosApiIntances from "../../../utils/axios";
+import axios from "../../../utils/axios";
 import Image from "next/image";
 import Layout from "../../../components/Layout";
 import styles from "../../../styles/Register.module.css";
@@ -25,7 +25,7 @@ export default function Register() {
 
   const handleRegister = (event) => {
     event.preventDefault();
-    axiosApiIntances
+    axios.axiosApiIntances
       .post("auth/register", {
         userName: form.firstName + " " + form.lastName,
         userEmail: form.userEmail,
@@ -47,6 +47,10 @@ export default function Register() {
           setShowAlert([false, ""]);
         }, 3000);
       });
+  };
+
+  const moveToLogin = () => {
+    router.push("/login");
   };
 
   return (
@@ -243,7 +247,9 @@ export default function Register() {
             </form>
             <p className={`${styles.semi} text-center mt-3`}>
               Already have an account?{" "}
-              <span className={styles.login}>Let’s Login</span>
+              <span className={styles.login} onClick={moveToLogin}>
+                Let’s Login
+              </span>
             </p>
           </div>
         </div>

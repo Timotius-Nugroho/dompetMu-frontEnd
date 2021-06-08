@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import axiosApiIntances from "../utils/axios";
+import { useRouter } from "next/router";
+import axios from "../utils/axios";
 import Image from "next/image";
 import Layout from "../components/Layout";
 import Navbar from "../components/module/Navbar";
@@ -12,66 +13,69 @@ import Cookie from "js-cookie";
 // import cookies from "next-cookies";
 
 export async function getServerSideProps(context) {
-  await authPage(context);
-  // const allCookies = cookies(context);
-  // console.log("USER ID", allCookies.user);
+  const data = await authPage(context);
+  axios.setToken(data.token);
 
-  // const user = await axiosApiIntances
-  //   .get(`user/by-id/${allCookies.user}`)
-  //   .then((res) => {
-  //     console.log(res.data);
-  //     // return res.data;
-  //   })
-  //   .catch((err) => {
-  //     console.log("error ini ");
-  //     // return [];
-  //   });
+  const dataTransaction = await axios.axiosApiIntances
+    .get("transaction?sort=month&limit=4")
+    .then((res) => {
+      // console.log(res.data.data);
+      return res.data.data;
+    })
+    .catch((err) => {
+      console.log(err.response);
+      return [];
+    });
+
+  const balance = await axios.axiosApiIntances
+    .get("transaction/balance")
+    .then((res) => {
+      // console.log(res.data.data);
+      return res.data.data;
+    })
+    .catch((err) => {
+      console.log(err.response);
+      return "Loading...";
+    });
+
+  const user = await axios.axiosApiIntances
+    .get(`user/by-id/${data.user}`)
+    .then((res) => {
+      return res.data.data[0];
+    })
+    .catch((err) => {
+      console.log(err.response);
+      return {};
+    });
+
   return {
-    props: {},
+    props: { dataTransaction, balance, user },
   };
 }
 
 export default function Home(props) {
+  const router = useRouter();
   const userId = Cookie.get("user");
   const [data, setData] = useState([]);
-  const [balance, setBalance] = useState("Loading...");
-  const [userPhone, setUserPhone] = useState("");
+  const balance = props.balance;
+  const userPhone = props.user.user_phone;
 
   useEffect(() => {
-    axiosApiIntances
-      .get("transaction?sort=month&limit=4")
-      .then((res) => {
-        // console.log(res.data.data);
-        setData(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response.data.msg);
-      });
-
-    axiosApiIntances
-      .get("transaction/balance")
-      .then((res) => {
-        // console.log(res.data.data);
-        setBalance(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response.data.msg);
-      });
-
-    axiosApiIntances
-      .get(`user/by-id/${Cookie.get("user")}`)
-      .then((res) => {
-        setUserPhone(res.data.data[0].user_phone);
-      })
-      .catch((err) => {
-        console.log(err.response.data.msg);
-      });
+    setData(props.dataTransaction);
   }, []);
 
-  // console.log(userId);
+  const moveToHistory = () => {
+    router.push("/history");
+  };
+
+  const moveToTransfer = () => {
+    router.push("/transfer");
+  };
+
+  // console.log(props);
   return (
     <Layout title="Home">
-      <Navbar />
+      <Navbar user={props.user} />
       <div className="container mt-5 pt-5 mb-5 pb-5">
         <div className="row mt-4">
           <div className={`${styles.breakPoints} col-sm-3`}>
@@ -93,6 +97,9 @@ export default function Home(props) {
                     <button
                       className={`${styles.btnSemi} btn btn-outline-primary d-flex justify-content-center`}
                       type="button"
+                      onClick={() => {
+                        moveToTransfer();
+                      }}
                     >
                       <i className="bi bi-arrow-up"></i>
                       <div className={styles.btnAjust}>Transfer</div>
@@ -143,7 +150,9 @@ export default function Home(props) {
                 <div className={`${styles.box} shadow p-3`}>
                   <div className="d-flex justify-content-between mt-3 mb-4">
                     <div className={styles.miniTitle}>Transaction History</div>
-                    <div className={styles.seeAll}>See all</div>
+                    <div className={styles.seeAll} onClick={moveToHistory}>
+                      See all
+                    </div>
                   </div>
                   {data.length > 0
                     ? data.map((item, index) => {
