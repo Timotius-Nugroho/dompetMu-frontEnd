@@ -55,7 +55,7 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default function History(props) {
+export default function Confirmation(props) {
   const router = useRouter();
   const receiverInfo = props.receiver;
   const [amount, setAmount] = useState(0);
@@ -107,7 +107,7 @@ export default function History(props) {
   // console.log("PROP", balanceLeft);
 
   return (
-    <Layout title="Transfer">
+    <Layout title="Confirmation">
       <Navbar user={props.user} />
 
       {showModal ? (

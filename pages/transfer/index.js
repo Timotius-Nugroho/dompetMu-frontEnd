@@ -43,7 +43,7 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default function History(props) {
+export default function Transfer(props) {
   const router = useRouter();
   axios.setToken(Cookie.get("token"));
   const userBalance = props.balance;
@@ -60,6 +60,9 @@ export default function History(props) {
       .then((res) => {
         // console.log(res.data.data);
         setData(res.data.data);
+        router.push(
+          `/transfer?page=1&limit=10&keywords=${search}&sort=user_name DESC`
+        );
       })
       .catch((err) => {
         console.log(err.response);

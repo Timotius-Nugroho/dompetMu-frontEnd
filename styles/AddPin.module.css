@@ -32,3 +32,15 @@
 .banner {
   width: 60%;
 }
+
+@media (min-width: 768px) {
+  .breakPoints {
+    display: inline;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .breakPoints {
+    display: none;
+  }
+}

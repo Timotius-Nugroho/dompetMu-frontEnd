@@ -60,7 +60,7 @@ export default function Login(props) {
       <div className="container-fluid">
         <div className="row">
           <div
-            className="col-sm-7 p-5"
+            className={`${styles.breakPoints} col-sm-7 p-5`}
             style={{ backgroundColor: "rgba(99, 121, 244, 1)" }}
           >
             <div className="ps-5 pe-5">
@@ -84,7 +84,7 @@ export default function Login(props) {
               </p>
             </div>
           </div>
-          <div className="col-sm-5 p-5">
+          <div className="col p-5">
             <p className={styles.title}>
               Start Accessing Banking Needs With All Devices and All Platforms
               With 30.000+ Users

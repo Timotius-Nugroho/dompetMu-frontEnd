@@ -16,7 +16,9 @@ export default function Navbar() {
 
   const handleTopUp = () => {};
 
-  const handleProfile = () => {};
+  const handleProfile = () => {
+    router.push("/profile");
+  };
 
   const handleLogout = () => {
     axios.setToken("");
