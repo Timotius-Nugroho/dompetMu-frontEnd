@@ -29,7 +29,7 @@ export default function Navbar(props) {
 
   return (
     <>
-      <div className={`${styles.boxNav} row p-2 m-2 shadow`}>
+      <div className={`${styles.boxNav} row p-2 mb-2 me-1 ms-1 shadow`}>
         <div
           className="col text-center"
           style={{ cursor: "pointer" }}
