@@ -13,7 +13,7 @@ export default function Footer() {
           </div>
           <div className="d-flex">
             <div className={styles.footerText}>+62 5637 8882 9901</div>
-            <div className={styles.footerText}>contact@dompetmu.com</div>
+            <div className={styles.footerText}>contact@dompetMu.com</div>
           </div>
         </div>
       </nav>
