@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "../../utils/axios";
+import ReactPaginate from "react-paginate";
 import Image from "next/image";
 import Layout from "../../components/Layout";
 import Navbar from "../../components/module/Navbar";
@@ -48,26 +49,36 @@ export default function Transfer(props) {
   axios.setToken(Cookie.get("token"));
   const userBalance = props.balance;
   const [data, setData] = useState([]);
+  const [page, setPage] = useState(1);
+  const limit = 6;
+  const [sort, setSort] = useState("user_name ASC");
+  const [pagination, setPagination] = useState({});
   const [receiverData, setReceiverData] = useState({});
-  const [search, setSearch] = useState("x");
+  const [search, setSearch] = useState("");
   const [amount, setAmount] = useState(0);
   const [inputAmount, setInputAmount] = useState(false);
   const [showAlert, setShowAlert] = useState([false, ""]);
 
   useEffect(() => {
-    axios.axiosApiIntances
-      .get(`user?page=1&limit=10&keywords=${search}&sort=user_name DESC`)
-      .then((res) => {
-        // console.log(res.data.data);
-        setData(res.data.data);
-        router.push(
-          `/transfer?page=1&limit=10&keywords=${search}&sort=user_name DESC`
-        );
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
-  }, [search]);
+    if (search) {
+      axios.axiosApiIntances
+        .get(`user?page=${page}&limit=${limit}&keywords=${search}&sort=${sort}`)
+        .then((res) => {
+          // console.log(res.data);
+          setData(res.data.data);
+          setPagination(res.data.pagination);
+          router.push(
+            `/transfer?page=${page}&limit=${limit}&keywords=${search}&sort=${sort}`
+          );
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    } else {
+      setData([]);
+      setPagination({});
+    }
+  }, [search, page, sort]);
 
   const goToSetAmount = (id) => {
     console.log("receiverID", id);
@@ -100,6 +111,9 @@ export default function Transfer(props) {
     } else {
       setAmount(0);
       setShowAlert([true, "Please enter numbers only!"]);
+      setTimeout(() => {
+        setShowAlert([false, ""]);
+      }, 1000);
     }
   };
 
@@ -115,7 +129,13 @@ export default function Transfer(props) {
     }
   };
 
+  const handlePageClick = (event) => {
+    const selectedPage = event.selected + 1;
+    setPage(selectedPage);
+  };
+
   // console.log("server", typeof userBalance);
+  // console.log(typeof userBalance);
   return (
     <Layout title="Transfer">
       <Navbar user={props.user} />
@@ -134,17 +154,30 @@ export default function Transfer(props) {
                 <div className={`${styles.miniTitle} mt-3`}>
                   Search Receiver
                 </div>
+                <div className="text-end">
+                  <span>Sort By</span>
+                  <select
+                    className={styles.dropDown}
+                    onChange={(event) => {
+                      setSort(event.target.value);
+                    }}
+                  >
+                    <option value="user_name ASC">name A-z</option>
+                    <option value="user_name DESC">name Z-a</option>
+                  </select>
+                </div>
                 <input
                   type="email"
-                  className={`form-control mt-3 mb-4 ${styles.input}`}
+                  className={`form-control mt-2 mb-4 ${styles.input}`}
                   placeholder="Search receiver here"
                   onChange={(event) => {
                     setSearch(event.target.value);
                   }}
                 />
                 <div className={styles.resultBox}>
-                  {data.length > 0
-                    ? data.map((item, index) => {
+                  {data.length > 0 ? (
+                    data.map((item, index) => {
+                      if (item.user_id != props.user.user_id) {
                         return (
                           <div className=" d-flex mb-3" key={index}>
                             <div
@@ -179,8 +212,32 @@ export default function Transfer(props) {
                             </div>
                           </div>
                         );
-                      })
-                    : ""}
+                      } else {
+                        return "";
+                      }
+                    })
+                  ) : (
+                    <div
+                      className={`${styles.noData} row align-items-center mx-auto`}
+                    >
+                      <div className="col">No Data</div>
+                    </div>
+                  )}
+                </div>
+                <div className="mt-3 d-flex justify-content-center">
+                  <ReactPaginate
+                    previousLabel={"prev"}
+                    nextLabel={"next"}
+                    breakLabel={"..."}
+                    breakClassName={"break-me"}
+                    pageCount={pagination.totalPage ? pagination.totalPage : 0}
+                    marginPagesDisplayed={5}
+                    pageRangeDisplayed={5}
+                    onPageChange={handlePageClick}
+                    containerClassName={styles.pagination}
+                    subContainerClassName={`${styles.pages} ${styles.pagination}`}
+                    activeClassName={styles.active}
+                  />
                 </div>
               </div>
             ) : (
@@ -235,7 +292,7 @@ export default function Transfer(props) {
                     }}
                   />
                   <div className={styles.miniTitle}>
-                    Rp{userBalance} Available
+                    Rp{userBalance.toLocaleString()} Available
                   </div>
                   <div
                     className="input-group mt-4 mx-auto"

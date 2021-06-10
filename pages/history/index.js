@@ -132,7 +132,7 @@ export default function History(props) {
                               {item.transaction_receiver_id == userId
                                 ? "+"
                                 : "-"}
-                              Rp{item.transaction_amount}
+                              Rp{item.transaction_amount.toLocaleString()}
                             </div>
                           </div>
                         </div>

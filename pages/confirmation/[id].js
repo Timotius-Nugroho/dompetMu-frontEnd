@@ -275,12 +275,14 @@ export default function Confirmation(props) {
               <div className={`${styles.miniTitle} mt-3 mb-4`}>Details</div>
               <div className="ms-3 mb-2">
                 <div className={styles.type}>Amount</div>
-                <div className={styles.detail}>Rp{amount}</div>
+                <div className={styles.detail}>
+                  Rp {amount.toLocaleString()}
+                </div>
               </div>
               <div className="ms-3 mb-2">
                 <div className={styles.type}>Balance left</div>
                 <div className={styles.detail}>
-                  Rp{balanceLeft - parseInt(amount)}
+                  Rp {(balanceLeft - parseInt(amount)).toLocaleString()}
                 </div>
               </div>
               <div className="ms-3 mb-2">

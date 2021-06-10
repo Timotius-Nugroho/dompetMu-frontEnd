@@ -73,6 +73,7 @@ export default function Home(props) {
   };
 
   // console.log(props);
+  // console.log(typeof balance);
   return (
     <Layout title="Home">
       <Navbar user={props.user} />
@@ -89,7 +90,9 @@ export default function Home(props) {
               <div className="row align-items-center">
                 <div className="col">
                   <div className={styles.semi}>Balance</div>
-                  <div className={`${styles.balance} mb-2`}>Rp{balance}</div>
+                  <div className={`${styles.balance} mb-2`}>
+                    Rp{balance.toLocaleString()}
+                  </div>
                   <div className={styles.semi}>{userPhone}</div>
                 </div>
                 <div className="col-sm-3">
@@ -205,7 +208,7 @@ export default function Home(props) {
                                 {item.transaction_receiver_id == userId
                                   ? "+"
                                   : "-"}
-                                Rp{item.transaction_amount}
+                                Rp{item.transaction_amount.toLocaleString()}
                               </div>
                             </div>
                           </div>

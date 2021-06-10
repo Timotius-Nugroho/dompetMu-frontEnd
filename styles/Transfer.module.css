@@ -6,12 +6,33 @@
 .resultBox {
   border-radius: 8px;
   /* border: solid; */
-  height: 380px;
+  height: 335px;
   overflow: auto;
+}
+
+.noData {
+  font-weight: 600;
+  width: 99%;
+  color: #7a7886;
+  font-size: 40px;
+  text-align: center;
+  height: 300px;
+  /* border: solid; */
 }
 
 .input {
   border: none;
+  background-color: rgba(58, 61, 66, 0.1);
+}
+
+.dropDown {
+  border: none;
+  margin-left: 3px;
+  padding-left: 1px;
+  padding-right: 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border-radius: 5px;
   background-color: rgba(58, 61, 66, 0.1);
 }
 
@@ -65,6 +86,53 @@
 .alert {
   color: red;
   font-size: 10px;
+}
+
+.pagination {
+  display: flex;
+  list-style: none;
+  outline: none;
+  font-family: "Mulish", sans-serif;
+  font-size: 14px;
+  line-height: 12px;
+  letter-spacing: 0.75px;
+  color: #6e7191;
+}
+.pagination > .active > a {
+  background-color: #6379f4;
+  border-color: #6379f4;
+  border-radius: 6px;
+  color: #fff;
+}
+.pagination > li > a {
+  border: 1px solid #6379f4;
+  border-radius: 6px;
+  margin-left: 3px;
+  margin-right: 3px;
+  padding: 5px 10px;
+  outline: none;
+  cursor: pointer;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  background-color: #6379f4;
+  border-color: #6379f4;
+  border-radius: 6px;
+  outline: none;
+}
+.pagination > li > a,
+.pagination > li > span {
+  color: #6379f4;
+}
+.pagination > li:first-child > a,
+.pagination > li:first-child > span,
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+  border-radius: 6px;
 }
 
 @media (min-width: 997.98px) {
