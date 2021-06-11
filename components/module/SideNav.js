@@ -14,7 +14,9 @@ export default function Navbar() {
     router.push("/transfer");
   };
 
-  const handleTopUp = () => {};
+  const handleTopUp = () => {
+    router.push("/topup");
+  };
 
   const handleProfile = () => {
     router.push("/profile");
