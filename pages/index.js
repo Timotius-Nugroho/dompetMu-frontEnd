@@ -10,6 +10,12 @@ import Footer from "../components/module/Footer";
 import styles from "../styles/Home.module.css";
 import { authPage } from "../middleware/authorizationPage";
 import Cookie from "js-cookie";
+
+import React from "react";
+import { Bar } from "react-chartjs-2";
+
+import { getTransactionSummary } from "redux/action/transaction";
+import { initializeStore } from "redux/store";
 // import cookies from "next-cookies";
 
 export async function getServerSideProps(context) {
@@ -48,8 +54,17 @@ export async function getServerSideProps(context) {
       return {};
     });
 
+  const reduxStore = initializeStore();
+  const { dispatch } = reduxStore;
+  await dispatch(getTransactionSummary(data.token));
+
   return {
-    props: { dataTransaction, balance, user },
+    props: {
+      dataTransaction,
+      balance,
+      user,
+      initialReduxState: reduxStore.getState(),
+    },
   };
 }
 
@@ -59,6 +74,47 @@ export default function Home(props) {
   const [data, setData] = useState([]);
   const balance = props.balance;
   const userPhone = props.user.user_phone;
+  const amountIn = parseInt(props.initialReduxState.transaction.data.amountIn);
+  const amountOut = parseInt(
+    props.initialReduxState.transaction.data.amountOut
+  );
+
+  const dayName = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+  const totalAmountPerDay = [0, 0, 0, 0, 0, 0, 0];
+
+  if (props.initialReduxState.transaction.data.transactionPerDay) {
+    for (const e of props.initialReduxState.transaction.data
+      .transactionPerDay) {
+      if (dayName.indexOf(e.day_name) > 0) {
+        totalAmountPerDay[dayName.indexOf(e.day_name)] = parseInt(
+          e.total_amount
+        );
+      }
+    }
+  }
+
+  const dataChart = {
+    labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    datasets: [
+      {
+        data: totalAmountPerDay,
+        backgroundColor: ["rgba(99, 121, 244, 0.6)"],
+        borderColor: ["rgba(99, 121, 244, 1)"],
+        borderWidth: 1,
+        barThickness: 10,
+        minBarLength: 2,
+        borderRadius: 4,
+      },
+    ],
+  };
 
   useEffect(() => {
     setData(props.dataTransaction);
@@ -76,7 +132,7 @@ export default function Home(props) {
     router.push("/topup");
   };
 
-  // console.log(props);
+  // console.log(props.initialReduxState.transaction.data);
   // console.log(typeof balance);
   return (
     <Layout title="Home">
@@ -138,7 +194,9 @@ export default function Home(props) {
                         style={{ color: "green", fontSize: "20px" }}
                       ></i>
                       <div className={styles.semi}>Income</div>
-                      <div className={styles.miniTitle}>Rp2.000.000</div>
+                      <div className={styles.miniTitle}>
+                        Rp {amountIn.toLocaleString()}
+                      </div>
                     </div>
                     <div>
                       <i
@@ -146,12 +204,38 @@ export default function Home(props) {
                         style={{ color: "red", fontSize: "20px" }}
                       ></i>
                       <div className={styles.semi}>Expense</div>
-                      <div className={styles.miniTitle}>Rp1.560.000</div>
+                      <div className={styles.miniTitle}>
+                        Rp {amountOut.toLocaleString()}
+                      </div>
                     </div>
                   </div>
                   <div className="m-3" style={{ height: "198px" }}>
                     <div className="row align-items-center mt-3">
-                      <div className="col">Comming soon !</div>
+                      <div className="col">
+                        <div style={{ height: "198px" }}>
+                          <Bar
+                            data={dataChart}
+                            options={{
+                              maintainAspectRatio: false,
+                              plugins: {
+                                legend: {
+                                  display: false,
+                                },
+                              },
+                              scales: {
+                                y: {
+                                  display: false,
+                                },
+                                x: {
+                                  grid: {
+                                    display: false,
+                                  },
+                                },
+                              },
+                            }}
+                          />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

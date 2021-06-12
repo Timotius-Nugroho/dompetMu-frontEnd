@@ -224,21 +224,27 @@ export default function Transfer(props) {
                     </div>
                   )}
                 </div>
-                <div className="mt-3 d-flex justify-content-center">
-                  <ReactPaginate
-                    previousLabel={"prev"}
-                    nextLabel={"next"}
-                    breakLabel={"..."}
-                    breakClassName={"break-me"}
-                    pageCount={pagination.totalPage ? pagination.totalPage : 0}
-                    marginPagesDisplayed={5}
-                    pageRangeDisplayed={5}
-                    onPageChange={handlePageClick}
-                    containerClassName={styles.pagination}
-                    subContainerClassName={`${styles.pages} ${styles.pagination}`}
-                    activeClassName={styles.active}
-                  />
-                </div>
+                {data.length > 0 ? (
+                  <div className="mt-3 d-flex justify-content-center">
+                    <ReactPaginate
+                      previousLabel={"prev"}
+                      nextLabel={"next"}
+                      breakLabel={"..."}
+                      breakClassName={"break-me"}
+                      pageCount={
+                        pagination.totalPage ? pagination.totalPage : 0
+                      }
+                      marginPagesDisplayed={5}
+                      pageRangeDisplayed={5}
+                      onPageChange={handlePageClick}
+                      containerClassName={styles.pagination}
+                      subContainerClassName={`${styles.pages} ${styles.pagination}`}
+                      activeClassName={styles.active}
+                    />
+                  </div>
+                ) : (
+                  ""
+                )}
               </div>
             ) : (
               <div className={`${styles.box} shadow p-4`}>

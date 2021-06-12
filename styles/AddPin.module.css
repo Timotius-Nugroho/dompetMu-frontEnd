@@ -33,13 +33,13 @@
   width: 60%;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 898px) {
   .breakPoints {
     display: inline;
   }
 }
 
-@media (max-width: 767.98px) {
+@media (max-width: 897.98px) {
   .breakPoints {
     display: none;
   }

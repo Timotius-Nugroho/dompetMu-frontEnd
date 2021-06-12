@@ -7,6 +7,10 @@ import Footer from "components/module/Footer";
 import styles from "styles/TopUp.module.css";
 import { authPage } from "middleware/authorizationPage";
 import { useState } from "react";
+import Cookie from "js-cookie";
+
+import { connect } from "react-redux";
+import { topUp } from "redux/action/transaction";
 
 export async function getServerSideProps(context) {
   const data = await authPage(context);
@@ -27,16 +31,32 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default function TopUp(props) {
-  const [showModal, setShowModal] = useState(true);
+function TopUp(props) {
+  const token = Cookie.get("token");
+  const [showModal, setShowModal] = useState(false);
   const [showAlertModal, setShowAlertModal] = useState([false, ""]);
   const [amount, setAmount] = useState("");
 
   const handleTopUp = (event) => {
     event.preventDefault();
+    props
+      .topUp(token, { transactionMethod: "Instant", transactionAmount: amount })
+      .then((res) => {
+        setShowAlertModal([true, res.value.data.msg]);
+        setTimeout(() => {
+          setShowAlertModal([false, ""]);
+          setShowModal(false);
+        }, 2000);
+      })
+      .catch((err) => {
+        setShowAlertModal([true, err.response.data.msg]);
+        setTimeout(() => {
+          setShowAlertModal([false, ""]);
+        }, 3000);
+      });
   };
 
-  // console.log(amount);
+  // console.log(props);
   return (
     <Layout title="Top Up">
       <Navbar user={props.user} />
@@ -176,3 +196,6 @@ export default function TopUp(props) {
     </Layout>
   );
 }
+
+const mapDispatchToProps = { topUp };
+export default connect(null, mapDispatchToProps)(TopUp);

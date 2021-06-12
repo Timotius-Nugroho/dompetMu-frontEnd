@@ -1,18 +1,20 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import Cookie from "js-cookie";
 import axios from "../../../utils/axios";
 import Image from "next/image";
 import Layout from "../../../components/Layout";
 import styles from "styles/ForgotPassword.module.css";
 import { unauthPage } from "../../../middleware/authorizationPage";
 
+import { connect } from "react-redux";
+import { forgotPassword } from "redux/action/auth";
+
 export async function getServerSideProps(context) {
   await unauthPage(context);
   return { props: {} };
 }
 
-export default function Forgot(props) {
+function Forgot(props) {
   const router = useRouter();
   const [userEmail, setUserEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -24,9 +26,52 @@ export default function Forgot(props) {
 
   const handleForget = (event) => {
     event.preventDefault();
+    if (!accountFound) {
+      props
+        .forgotPassword({ userEmail })
+        .then((res) => {
+          // console.log(res.value.data.msg);
+          setShowAlert([true, res.value.data.msg]);
+          setTimeout(() => {
+            setShowAlert([false, ""]);
+            setAccountFound(true);
+          }, 1000);
+        })
+        .catch((err) => {
+          // console.log(err.response.data.msg);
+          setShowAlert([true, err.response.data.msg]);
+          setTimeout(() => {
+            setShowAlert([false, ""]);
+          }, 3000);
+        });
+    } else {
+      if (newPassword === confirmPassword) {
+        props
+          .forgotPassword({ userEmail, userPassword: newPassword })
+          .then((res) => {
+            setShowAlert([true, res.value.data.msg]);
+            setTimeout(() => {
+              setShowAlert([false, ""]);
+              router.push("/login");
+            }, 3000);
+          })
+          .catch((err) => {
+            setShowAlert([true, err.response.data.msg]);
+            setTimeout(() => {
+              setShowAlert([false, ""]);
+            }, 3000);
+          });
+      } else {
+        setShowAlert([true, "new and confirm password didn't match !"]);
+        setTimeout(() => {
+          setShowAlert([false, ""]);
+        }, 3000);
+      }
+    }
   };
 
   // console.log(userEmail, newPassword, confirmPassword);
+  // console.log(props);
   return (
     <Layout title="Forgot password">
       <div className="container-fluid">
@@ -112,6 +157,7 @@ export default function Forgot(props) {
                       placeholder="Create new password"
                       type={showNewPassword ? "text" : "password"}
                       className={`${styles.input} form-control`}
+                      value={newPassword}
                       onChange={(event) => {
                         setNewPassword(event.target.value);
                       }}
@@ -147,6 +193,7 @@ export default function Forgot(props) {
                       placeholder="Cofirm new password"
                       type={showConfirmPassword ? "text" : "password"}
                       className={`${styles.input} form-control`}
+                      value={confirmPassword}
                       onChange={(event) => {
                         setConfirmPassword(event.target.value);
                       }}
@@ -186,3 +233,6 @@ export default function Forgot(props) {
     </Layout>
   );
 }
+
+const mapDispatchToProps = { forgotPassword };
+export default connect(null, mapDispatchToProps)(Forgot);
