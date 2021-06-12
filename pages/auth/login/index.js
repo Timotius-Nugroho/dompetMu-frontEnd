@@ -55,6 +55,10 @@ export default function Login(props) {
     router.push("/register");
   };
 
+  const moveToForgotPassword = () => {
+    router.push("/forgot-password");
+  };
+
   return (
     <Layout title="Login">
       <div className="container-fluid">
@@ -163,7 +167,14 @@ export default function Login(props) {
                   </span>
                 </div>
               </div>
-              <p className={styles.forgot}>Forgot password?</p>
+              <p
+                className={styles.forgot}
+                onClick={() => {
+                  moveToForgotPassword();
+                }}
+              >
+                Forgot password?
+              </p>
               <div className="d-grid gap-2 mt-5 pt-5">
                 <button
                   type="submit"

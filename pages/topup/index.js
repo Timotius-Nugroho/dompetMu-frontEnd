@@ -6,6 +6,7 @@ import UpperNav from "components/module/UpperNav";
 import Footer from "components/module/Footer";
 import styles from "styles/TopUp.module.css";
 import { authPage } from "middleware/authorizationPage";
+import { useState } from "react";
 
 export async function getServerSideProps(context) {
   const data = await authPage(context);
@@ -27,10 +28,74 @@ export async function getServerSideProps(context) {
 }
 
 export default function TopUp(props) {
-  // console.log(userImage);
+  const [showModal, setShowModal] = useState(true);
+  const [showAlertModal, setShowAlertModal] = useState([false, ""]);
+  const [amount, setAmount] = useState("");
+
+  const handleTopUp = (event) => {
+    event.preventDefault();
+  };
+
+  // console.log(amount);
   return (
-    <Layout title="Personal Info">
+    <Layout title="Top Up">
       <Navbar user={props.user} />
+
+      {showModal ? (
+        <div
+          className={`position-fixed top-50 start-50 translate-middle p-4 ${styles.modal}`}
+        >
+          <div className="d-flex justify-content-between">
+            <p className={`${styles.miniTitle} mt-2`}>
+              Enter the top-up amount
+            </p>
+            <div
+              onClick={() => {
+                setShowModal(false);
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              <i className="bi bi-x-circle" style={{ fontSize: "30px" }}></i>
+            </div>
+          </div>
+          <div className={`${styles.semi} mt-3`} style={{ width: "80%" }}>
+            Enter the maximum amount of money Rp2.000.000, upgrade to full
+            service for unlimited topup
+          </div>
+          <form onSubmit={handleTopUp}>
+            <div className="d-flex justify-content-between mt-3">
+              <div className={`${styles.input} input-group`}>
+                <input
+                  type="number"
+                  className="form-control text-center"
+                  maxLength="1"
+                  onChange={(event) => {
+                    setAmount(event.target.value);
+                  }}
+                  min="10000"
+                  placeholder="Minimal top up Rp10.000"
+                  required
+                />
+              </div>
+            </div>
+            {showAlertModal[0] ? (
+              <div className="alert alert-warning text-center m-3" role="alert">
+                {showAlertModal[1]}
+              </div>
+            ) : (
+              ""
+            )}
+            <div className="d-grid gap-2 mt-4">
+              <button type="submit" className={`${styles.btn} btn btn-primary`}>
+                Continue
+              </button>
+            </div>
+          </form>
+        </div>
+      ) : (
+        ""
+      )}
+
       <div className="container mt-5 pt-5 mb-5 pb-5">
         <div className="row mt-4">
           <div className={`${styles.breakPoints} col-sm-3`}>
@@ -90,6 +155,17 @@ export default function TopUp(props) {
                 <div className={`col-1 text-center ${styles.number}`}>8</div>
                 <div className={`col ${styles.semi}`}>
                   You can see your money in DompetMu within 3 hours.
+                </div>
+                <div className="col-sm-2">
+                  <button
+                    className={`btn btn-primary ${styles.btnTopup} mt-3 mt-sm-0`}
+                    type="button"
+                    onClick={() => {
+                      setShowModal(true);
+                    }}
+                  >
+                    Top Up Now
+                  </button>
                 </div>
               </div>
             </div>

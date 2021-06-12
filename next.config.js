@@ -18,6 +18,10 @@ module.exports = {
         source: "/addpin", // sebagai pengganti path
         destination: "/auth/addpin", // sebagai lokasi asli
       },
+      {
+        source: "/forgot-password", // sebagai pengganti path
+        destination: "/auth/forgot-password", // sebagai lokasi asli
+      },
     ];
   },
 };

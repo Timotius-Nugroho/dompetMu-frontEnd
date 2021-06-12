@@ -1,25 +1,73 @@
-.box {
-  border-radius: 10px;
-  height: 544px;
-}
-
-.semi {
-  font-size: 14px;
-  line-height: 31px;
-  color: #7a7886;
-}
-
 .miniTitle {
   font-weight: 700;
   font-size: 17px;
   line-height: 25px;
 }
 
-.number {
-  font-size: 18px;
-  line-height: 25px;
-  color: #6379f4;
-  font-weight: 700;
+.btnTopup {
+  width: 100%;
+  font-size: 8px;
+}
+
+.modal {
+  border: solid;
+  border-radius: 8px;
+  background-color: white;
+  z-index: 1060;
+}
+
+.btn {
+  height: 50px;
+  border-radius: 8px;
+  background-color: #6379f4;
+}
+
+@media (min-width: 533.98px) {
+  .box {
+    border-radius: 10px;
+    height: 544px;
+  }
+
+  .modal {
+    width: auto;
+  }
+
+  .semi {
+    font-size: 14px;
+    line-height: 31px;
+    color: #7a7886;
+  }
+
+  .number {
+    font-size: 18px;
+    line-height: 25px;
+    color: #6379f4;
+    font-weight: 700;
+  }
+}
+
+@media (max-width: 533px) {
+  .box {
+    border-radius: 10px;
+    height: auto;
+  }
+
+  .modal {
+    width: 90%;
+  }
+
+  .semi {
+    font-size: 11px;
+    line-height: 31px;
+    color: #7a7886;
+  }
+
+  .number {
+    font-size: 14px;
+    line-height: 25px;
+    color: #6379f4;
+    font-weight: 700;
+  }
 }
 
 @media (min-width: 997.98px) {

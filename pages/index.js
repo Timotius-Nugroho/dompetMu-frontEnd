@@ -72,6 +72,10 @@ export default function Home(props) {
     router.push("/transfer");
   };
 
+  const moveToTopup = () => {
+    router.push("/topup");
+  };
+
   // console.log(props);
   // console.log(typeof balance);
   return (
@@ -110,6 +114,9 @@ export default function Home(props) {
                     <button
                       className={`${styles.btnSemi} btn btn-outline-primary d-flex justify-content-center`}
                       type="button"
+                      onClick={() => {
+                        moveToTopup();
+                      }}
                     >
                       <i
                         className="bi bi-plus"
