@@ -5,6 +5,8 @@
 
 .box {
   border-radius: 10px;
+  height: 350px;
+  overflow: auto;
 }
 
 .semi {

@@ -81,6 +81,16 @@
   border-radius: 20px;
 }
 
+.pp {
+  border-radius: 15px;
+}
+
+.testimoniBox {
+  /* border: solid; */
+  width: 80%;
+  border-radius: 20px;
+}
+
 @media (max-width: 575.98px) {
   .mainTitle {
     color: white;

@@ -240,10 +240,182 @@ export default function Landing(props) {
         <div className={`${styles.semi} mt-3`}>
           We have some great features from the application and it’s totally free
         </div>
-        <div className={`${styles.semi}`}>
+        <div className={`${styles.semi} mb-5`}>
           to use by all users around the world.
         </div>
+
+        <div
+          id="carouselExampleControlsNoTouching"
+          className="carousel slide"
+          data-bs-touch="false"
+          data-bs-interval="false"
+        >
+          <div className="carousel-inner">
+            <div className="carousel-item active">
+              <div
+                className={`${styles.testimoniBox} shadow mx-auto text-center p-3 m-3`}
+              >
+                <div className="mb-3">
+                  <Image
+                    src="/squid.jpg"
+                    alt="-"
+                    width={90}
+                    height={90}
+                    className={styles.pp}
+                  />
+                </div>
+                <div className={styles.lable}>Alex Hansinburg</div>
+                <div
+                  className={`${styles.semi} mb-4`}
+                  style={{ fontWeight: "600" }}
+                >
+                  Designer
+                </div>
+                <div
+                  className={`${styles.semi} mx-auto`}
+                  style={{ width: "70%" }}
+                >
+                  “This is the most outstanding app that I’ve ever try in my
+                  live, this app is such an amazing masterpiece and it’s
+                  suitable for you who is bussy with their bussiness and must
+                  transfer money to another person aut there. Just try this app
+                  and see the power!”
+                </div>
+              </div>
+            </div>
+            <div className="carousel-item">
+              <div
+                className={`${styles.testimoniBox} shadow mx-auto text-center p-3 m-3`}
+              >
+                <div className="mb-3">
+                  <Image
+                    src="/squid.jpg"
+                    alt="-"
+                    width={90}
+                    height={90}
+                    className={styles.pp}
+                  />
+                </div>
+                <div className={styles.lable}>Alex Hansinburg</div>
+                <div
+                  className={`${styles.semi} mb-4`}
+                  style={{ fontWeight: "600" }}
+                >
+                  Designer
+                </div>
+                <div
+                  className={`${styles.semi} mx-auto`}
+                  style={{ width: "70%" }}
+                >
+                  “This is the most outstanding app that I’ve ever try in my
+                  live, this app is such an amazing masterpiece and it’s
+                  suitable for you who is bussy with their bussiness and must
+                  transfer money to another person aut there. Just try this app
+                  and see the power!”
+                </div>
+              </div>
+            </div>
+            <div className="carousel-item">
+              <div
+                className={`${styles.testimoniBox} shadow mx-auto text-center p-3 m-3`}
+              >
+                <div className="mb-3">
+                  <Image
+                    src="/squid.jpg"
+                    alt="-"
+                    width={90}
+                    height={90}
+                    className={styles.pp}
+                  />
+                </div>
+                <div className={styles.lable}>Alex Hansinburg</div>
+                <div
+                  className={`${styles.semi} mb-4`}
+                  style={{ fontWeight: "600" }}
+                >
+                  Designer
+                </div>
+                <div
+                  className={`${styles.semi} mx-auto`}
+                  style={{ width: "70%" }}
+                >
+                  “This is the most outstanding app that I’ve ever try in my
+                  live, this app is such an amazing masterpiece and it’s
+                  suitable for you who is bussy with their bussiness and must
+                  transfer money to another person aut there. Just try this app
+                  and see the power!”
+                </div>
+              </div>
+            </div>
+          </div>
+          <button
+            className="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExampleControlsNoTouching"
+            data-bs-slide="prev"
+          >
+            <span
+              className="carousel-control-prev-icon"
+              aria-hidden="true"
+              style={{ backgroundColor: "black", borderRadius: "8px" }}
+            ></span>
+            <span className="visually-hidden">Previous</span>
+          </button>
+          <button
+            className="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExampleControlsNoTouching"
+            data-bs-slide="next"
+          >
+            <span
+              className="carousel-control-next-icon"
+              aria-hidden="true"
+              style={{ backgroundColor: "black", borderRadius: "8px" }}
+            ></span>
+            <span className="visually-hidden">Next</span>
+          </button>
+        </div>
       </section>
+      <footer className={`${styles.navbar} pt-5 pe-5 ps-5 pb-3 mt-3`}>
+        <div className={`${styles.brand} mb-4`}>
+          <h3>DompetMu</h3>
+        </div>
+        <div
+          className={`${styles.semi}`}
+          style={{ color: "rgba(239, 239, 239, 0.75)" }}
+        >
+          Simplify financial needs and saving much time in
+        </div>
+        <div
+          className={`${styles.semi}`}
+          style={{ color: "rgba(239, 239, 239, 0.75)" }}
+        >
+          banking needs with one single app.
+        </div>
+        <hr style={{ color: "white" }} />
+        <div className="d-flex justify-content-between">
+          <div
+            className={`${styles.semi}`}
+            style={{ color: "rgba(239, 239, 239, 0.75)", fontSize: "13px" }}
+          >
+            2021 DompetMu. All right reserved.
+          </div>
+          <div className="d-flex">
+            <div
+              className={`${styles.semi} m-1`}
+              style={{ color: "rgba(239, 239, 239, 0.75)", fontSize: "13px" }}
+            >
+              +62 5637 8882 9901
+            </div>
+            <div
+              className={`${styles.semi} m-1`}
+              style={{ color: "rgba(239, 239, 239, 0.75)", fontSize: "13px" }}
+            >
+              contact@dompetmu.com
+            </div>
+          </div>
+        </div>
+      </footer>
     </Layout>
   );
 }

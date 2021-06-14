@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <>
       <nav
-        className="navbar navbar-expand-lg fixed-bottom shadow"
+        className="navbar navbar-expand-lg shadow"
         style={{ backgroundColor: "#6379F4" }}
       >
         <div className="container-fluid">

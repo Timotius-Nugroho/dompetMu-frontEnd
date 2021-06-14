@@ -57,6 +57,7 @@ export default function Transfer(props) {
   const [search, setSearch] = useState("");
   const [amount, setAmount] = useState(0);
   const [inputAmount, setInputAmount] = useState(false);
+  const [note, setNote] = useState("");
   const [showAlert, setShowAlert] = useState([false, ""]);
 
   useEffect(() => {
@@ -122,6 +123,10 @@ export default function Transfer(props) {
       setShowAlert([true, "Please input your amount correctly !"]);
     } else {
       Cookie.set("amount", amount, {
+        expires: 1,
+        secure: true,
+      });
+      Cookie.set("note", note, {
         expires: 1,
         secure: true,
       });
@@ -312,6 +317,9 @@ export default function Transfer(props) {
                       className="form-control"
                       placeholder="Add some notes"
                       aria-describedby="basic-addon1"
+                      onChange={(event) => {
+                        setNote(event.target.value);
+                      }}
                     />
                   </div>
                 </div>

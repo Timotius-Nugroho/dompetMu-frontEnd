@@ -93,7 +93,7 @@ export default function Home(props) {
   if (props.initialReduxState.transaction.data.transactionPerDay) {
     for (const e of props.initialReduxState.transaction.data
       .transactionPerDay) {
-      if (dayName.indexOf(e.day_name) > 0) {
+      if (dayName.indexOf(e.day_name) >= 0) {
         totalAmountPerDay[dayName.indexOf(e.day_name)] = parseInt(
           e.total_amount
         );
@@ -151,9 +151,9 @@ export default function Home(props) {
                 <div className="col">
                   <div className={styles.semi}>Balance</div>
                   <div className={`${styles.balance} mb-2`}>
-                    Rp{balance.toLocaleString()}
+                    Rp {balance.toLocaleString()}
                   </div>
-                  <div className={styles.semi}>{userPhone}</div>
+                  <div className={styles.semi}>+62 {userPhone}</div>
                 </div>
                 <div className="col-sm-3">
                   <div className="d-grid gap-2">

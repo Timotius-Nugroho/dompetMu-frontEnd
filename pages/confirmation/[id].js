@@ -59,12 +59,15 @@ export default function Confirmation(props) {
   const router = useRouter();
   const receiverInfo = props.receiver;
   const [amount, setAmount] = useState(0);
+  const [note, setNote] = useState("");
   const balanceLeft = props.balance;
   const dateTime = props.dateTime;
+  const [transactionId, setTransactionId] = useState(0);
 
   const [showModal, setShowModal] = useState(false);
   const [showAlertModal, setShowAlertModal] = useState([false, ""]);
   const [succes, setSucces] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [one, setOne] = useState("");
   const [two, setTwo] = useState("");
@@ -76,6 +79,7 @@ export default function Confirmation(props) {
   useEffect(() => {
     if (Cookie.get("amount")) {
       setAmount(Cookie.get("amount"));
+      setNote(Cookie.get("note"));
     }
     axios.setToken(Cookie.get("token"));
   }, []);
@@ -92,6 +96,7 @@ export default function Confirmation(props) {
       })
       .then((res) => {
         // console.log(res.data);
+        setTransactionId(res.data.data.id);
         setShowModal(false);
         setSucces(true);
       })
@@ -101,6 +106,29 @@ export default function Confirmation(props) {
         setTimeout(() => {
           setShowAlertModal([false, ""]);
         }, 3000);
+      });
+  };
+
+  const handleDownload = () => {
+    const transactionDetails = {
+      senderName: props.user.user_name,
+      receiverName: receiverInfo.user_name,
+      amount: `Rp ${amount.toLocaleString()}`,
+      balance: `Rp ${(balanceLeft - parseInt(amount)).toLocaleString()}`,
+      note: note,
+    };
+    // console.log(transactionDetails);
+    // window.open("https://www.google.com");
+    setIsLoading(true);
+    axios.axiosApiIntances
+      .post(`transaction/export/${transactionId}`, transactionDetails)
+      .then((res) => {
+        setIsLoading(false);
+        // console.log(res.data.data.url);
+        window.open(res.data.data.url);
+      })
+      .catch((err) => {
+        console.log(err.response.data.msg);
       });
   };
 
@@ -291,7 +319,7 @@ export default function Confirmation(props) {
               </div>
               <div className="ms-3 mb-2">
                 <div className={styles.type}>Note</div>
-                <div className={styles.detail}>-</div>
+                <div className={styles.detail}>{note}</div>
               </div>
               {!succes ? (
                 <div className="d-flex flex-row-reverse mt-4">
@@ -352,8 +380,22 @@ export default function Confirmation(props) {
                         <button
                           type="button"
                           className="btn btn-outline-primary m-1"
+                          onClick={() => {
+                            handleDownload();
+                          }}
                         >
-                          <i className="bi bi-download"></i>
+                          {isLoading ? (
+                            <div
+                              className="spinner-border text-success"
+                              role="status"
+                            >
+                              <span className="visually-hidden">
+                                Loading...
+                              </span>
+                            </div>
+                          ) : (
+                            <i className="bi bi-download"></i>
+                          )}
                         </button>
                         <button
                           type="button"
