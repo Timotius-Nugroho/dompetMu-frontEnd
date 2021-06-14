@@ -1,0 +1,166 @@
+.navbar {
+  background-color: #6379f4;
+}
+
+.head {
+  background-color: #6379f4;
+}
+
+.brand {
+  color: white;
+  font-weight: 600;
+}
+
+.btnCustom {
+  border-radius: 9px;
+  color: #6379f4;
+  font-weight: 500;
+}
+
+.btnLogin {
+  border-radius: 9px;
+  font-weight: 500;
+  border: 2px solid white;
+  background-color: #6379f4;
+}
+
+.btnLogin:hover {
+  background-color: #6379f4;
+  border-color: white;
+  color: black;
+}
+
+.btnLogin:active {
+  background-color: #6379f4;
+  border-color: white;
+  color: black;
+}
+
+.btnRegister {
+  border-radius: 9px;
+  font-weight: 500;
+  color: #6379f4;
+}
+
+.card {
+  width: 250px;
+  border-radius: 10px;
+}
+
+.icon {
+  background-color: rgba(71, 58, 209, 0.1);
+  width: 40px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 20px;
+}
+
+.lable {
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.desc {
+  font-size: 14px;
+  color: rgba(58, 61, 66, 0.9);
+}
+
+.cardCnt {
+  overflow: auto;
+}
+
+.money {
+  background-color: rgba(71, 58, 209, 0.06);
+  width: fit-content;
+  color: #6379f4;
+  border-radius: 80px;
+}
+
+.whiteBox {
+  background-color: white;
+  border-radius: 20px;
+}
+
+@media (max-width: 575.98px) {
+  .mainTitle {
+    color: white;
+    font-weight: 600;
+    font-size: 40px;
+  }
+
+  .money {
+    font-weight: 600;
+    font-size: 35px;
+  }
+
+  .secondTitle {
+    font-weight: 600;
+    font-size: 30px;
+  }
+
+  .mini {
+    font-size: 14px;
+    color: white;
+  }
+
+  .semi {
+    font-size: 14px;
+    color: rgba(58, 61, 66, 0.9);
+  }
+
+  .breakPoint {
+    display: none;
+  }
+
+  .breakPointRev {
+    display: inline;
+  }
+}
+
+@media (min-width: 576px) {
+  .mainTitle {
+    color: white;
+    font-weight: 700;
+    font-size: 68px;
+  }
+
+  .money {
+    font-weight: 700;
+    font-size: 60px;
+  }
+
+  .secondTitle {
+    font-weight: 700;
+    font-size: 55px;
+  }
+
+  .mini {
+    font-size: 18px;
+    color: white;
+  }
+
+  .semi {
+    font-size: 18px;
+    color: rgba(58, 61, 66, 0.9);
+  }
+
+  .breakPoint {
+    display: inline;
+    color: brown;
+  }
+
+  .breakPointRev {
+    display: none;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .breakPointPict {
+    display: none;
+  }
+}
+@media (min-width: 1200px) {
+  .breakPointPict {
+    display: inline;
+  }
+}

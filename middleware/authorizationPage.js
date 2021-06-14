@@ -23,7 +23,7 @@ export function authPage(context) {
     if (!allCookies.token) {
       return context.res
         .writeHead(302, {
-          Location: "/login",
+          Location: "/landing",
         })
         .end();
     }
