@@ -53,13 +53,23 @@ export default function Landing(props) {
           </div>
           <div className={styles.breakPointRev}>
             <div className="d-flex">
-              <div>
+              <div
+                onClick={() => {
+                  moveToLogin();
+                }}
+                style={{ cursor: "pointer" }}
+              >
                 <i
                   className="bi bi-box-arrow-right m-1"
                   style={{ color: "white", fontSize: "25px" }}
                 ></i>
               </div>
-              <div>
+              <div
+                onClick={() => {
+                  moveToRegister();
+                }}
+                style={{ cursor: "pointer" }}
+              >
                 <i
                   className="bi bi-journal-arrow-down m-2"
                   style={{ color: "white", fontSize: "24px" }}
@@ -70,7 +80,7 @@ export default function Landing(props) {
         </div>
       </nav>
       <section className={`${styles.head} text-center pb-5 pt-5`}>
-        <div>
+        <div className={styles.breakPoint}>
           <Image src="/flow.png" alt="Picture of the author" layout="fill" />
         </div>
         <div className={styles.mainTitle}>

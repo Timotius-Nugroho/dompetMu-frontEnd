@@ -85,7 +85,8 @@ export default function History(props) {
   };
 
   const goToPersonalInfo = () => {
-    router.push("/personal-info");
+    const id = Cookie.get("user");
+    router.push(`/personal-info/${id}`);
   };
 
   const goToChangePassword = () => {

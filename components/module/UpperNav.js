@@ -26,7 +26,7 @@ export default function Navbar(props) {
     axios.setToken("");
     Cookie.remove("token");
     Cookie.remove("user");
-    router.push("/login");
+    router.push("/landing");
   };
 
   return (
