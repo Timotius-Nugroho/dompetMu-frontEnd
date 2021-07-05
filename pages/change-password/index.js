@@ -73,10 +73,13 @@ export default function ChangePassword(props) {
     }
   };
 
+  const activeButton =
+    currentPassword && newPassword && repeatNewPassword && true;
+
   return (
     <Layout title="Change Password">
       <Navbar user={props.user} />
-      <div className="container mt-5 pt-5 mb-5 pb-5">
+      <div className="container mt-5 pt-5 mb-5">
         <div className="row mt-4">
           <div className={`${styles.breakPoints} col-sm-3`}>
             <SideNav />
@@ -213,7 +216,9 @@ export default function ChangePassword(props) {
                 <div className="d-grid gap-2 pt-3">
                   <button
                     type="submit"
-                    className={`${styles.btn} btn btn-primary`}
+                    className={`${
+                      activeButton ? styles.btnActive : styles.btn
+                    } btn btn-primary`}
                   >
                     Change Password
                   </button>

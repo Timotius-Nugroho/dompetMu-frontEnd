@@ -32,34 +32,56 @@ export default function Navbar() {
   return (
     <>
       <div className={`shadow ${styles.box} ps-2 pt-4`}>
-        <div className={`p-3 ${styles.sideNav}`} onClick={handleDashboard}>
-          <i className="m-2 bi bi-columns-gap" style={{ fontSize: "25px" }}></i>
-          <span className="m-2">Dashboard</span>
-        </div>
-        <div className={`p-3 ${styles.sideNav}`} onClick={handleTransfer}>
-          <i
-            className="m-2 bi bi-arrow-up-circle"
-            style={{ fontSize: "25px" }}
-          ></i>
-          <span className="m-2">Transfer</span>
-        </div>
-        <div className={`p-3 ${styles.sideNav}`} onClick={handleTopUp}>
-          <i className="m-2 bi bi-plus-circle" style={{ fontSize: "25px" }}></i>
-          <span className="m-2">Top Up</span>
-        </div>
-        <div className={`p-3 ${styles.sideNav}`} onClick={handleProfile}>
-          <i className="m-2 bi bi-person" style={{ fontSize: "25px" }}></i>
-          <span className="m-2">Profile</span>
+        <div
+          className={`d-flex p-3 ${styles.sideNav}`}
+          onClick={handleDashboard}
+        >
+          <div>
+            <i
+              className="p-3 bi bi-columns-gap"
+              style={{ fontSize: "25px" }}
+            ></i>
+          </div>
+          <div>Dashboard</div>
         </div>
         <div
-          className={`p-3 ${styles.sideNav} ${styles.selectedNav} ${styles.logout}`}
+          className={`d-flex p-3 ${styles.sideNav}`}
+          onClick={handleTransfer}
+        >
+          <div>
+            <i
+              className="p-3 bi bi-arrow-up-circle"
+              style={{ fontSize: "25px" }}
+            ></i>
+          </div>
+          <div>Transfer</div>
+        </div>
+        <div className={`d-flex p-3 ${styles.sideNav}`} onClick={handleTopUp}>
+          <div>
+            <i
+              className="p-3 bi bi-plus-circle"
+              style={{ fontSize: "25px" }}
+            ></i>
+          </div>
+          <div>Top Up</div>
+        </div>
+        <div className={`d-flex p-3 ${styles.sideNav}`} onClick={handleProfile}>
+          <div>
+            <i className="p-3 bi bi-person" style={{ fontSize: "25px" }}></i>
+          </div>
+          <div>Profile</div>
+        </div>
+        <div
+          className={`d-flex p-3 ${styles.sideNav} ${styles.logout}`}
           onClick={handleLogout}
         >
-          <i
-            className="m-2 bi bi-box-arrow-right"
-            style={{ fontSize: "25px" }}
-          ></i>
-          <span className="m-2">Logout</span>
+          <div>
+            <i
+              className="p-3 bi bi-box-arrow-right"
+              style={{ fontSize: "25px" }}
+            ></i>
+          </div>
+          <div>Logout</div>
         </div>
       </div>
     </>

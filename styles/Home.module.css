@@ -15,6 +15,11 @@
   color: #e0e0e0;
 }
 
+.status {
+  font-size: 10px;
+  color: #c29239;
+}
+
 .miniTitle {
   font-weight: 600;
   font-size: 17px;
@@ -28,10 +33,6 @@
   line-height: 25px;
   background-color: rgba(255, 255, 255, 0.2);
   color: #e0e0e0;
-}
-
-.btnAjust {
-  margin-left: 5px;
 }
 
 .balance {

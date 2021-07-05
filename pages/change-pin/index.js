@@ -74,10 +74,11 @@ export default function ChangePin(props) {
       });
   };
 
+  const activeButton = one && two && three && four && five && six && true;
   return (
     <Layout title="Change Pin">
       <Navbar user={props.user} />
-      <div className="container mt-5 pt-5 mb-5 pb-5">
+      <div className="container mt-5 pt-5 mb-5">
         <div className="row mt-4">
           <div className={`${styles.breakPoints} col-sm-3`}>
             <SideNav />
@@ -183,7 +184,9 @@ export default function ChangePin(props) {
                 <div className="d-grid gap-2 mt-5 pt-2">
                   <button
                     type="submit"
-                    className={`${styles.btn} btn btn-primary`}
+                    className={`${
+                      activeButton ? styles.btnActive : styles.btn
+                    } btn btn-primary`}
                   >
                     Continue
                   </button>

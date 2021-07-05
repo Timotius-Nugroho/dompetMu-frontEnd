@@ -71,6 +71,7 @@ export async function getServerSideProps(context) {
 export default function Home(props) {
   const router = useRouter();
   const userId = Cookie.get("user");
+  const token = Cookie.get("token");
   const [data, setData] = useState([]);
   const balance = props.balance;
   const userPhone = props.user.user_phone;
@@ -137,7 +138,7 @@ export default function Home(props) {
   return (
     <Layout title="Home">
       <Navbar user={props.user} />
-      <div className="container mt-5 pt-5 mb-5 pb-5">
+      <div className="container mt-5 pt-5 mb-5">
         <div className="row mt-4">
           <div className={`${styles.breakPoints} col-sm-3`}>
             <SideNav />
@@ -164,8 +165,7 @@ export default function Home(props) {
                         moveToTransfer();
                       }}
                     >
-                      <i className="bi bi-arrow-up"></i>
-                      <div className={styles.btnAjust}>Transfer</div>
+                      <div>Transfer</div>
                     </button>
                     <button
                       className={`${styles.btnSemi} btn btn-outline-primary d-flex justify-content-center`}
@@ -174,11 +174,7 @@ export default function Home(props) {
                         moveToTopup();
                       }}
                     >
-                      <i
-                        className="bi bi-plus"
-                        style={{ fontSize: "25px" }}
-                      ></i>
-                      <div>Top Up</div>
+                      <div>Top up</div>
                     </button>
                   </div>
                 </div>
@@ -296,10 +292,15 @@ export default function Home(props) {
                                     : styles.valueMinus
                                 }`}
                               >
-                                {item.transaction_receiver_id == userId
-                                  ? "+"
-                                  : "-"}
-                                Rp{item.transaction_amount.toLocaleString()}
+                                <div>
+                                  {item.transaction_receiver_id == userId
+                                    ? "+"
+                                    : "-"}
+                                  Rp{item.transaction_amount.toLocaleString()}
+                                </div>
+                                <div className={styles.status}>
+                                  {item.transaction_status}
+                                </div>
                               </div>
                             </div>
                           </div>

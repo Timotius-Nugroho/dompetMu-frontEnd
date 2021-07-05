@@ -1,13 +1,16 @@
 import Image from "next/image";
 import styles from "../../styles/Navbar.module.css";
+import { useRouter } from "next/router";
 
 export default function Navbar(props) {
+  const router = useRouter();
   const userName = props.user.user_name;
   const userPhone = props.user.user_phone;
   const userImage = props.user.user_image;
 
-  // console.log(process.env.IMG_BACKEND_URL);
-  // console.log(props.user.user_image);
+  const handleProfile = () => {
+    router.push("/profile");
+  };
 
   return (
     <>
@@ -20,7 +23,7 @@ export default function Navbar(props) {
             DompetMu
           </div>
           <div className="d-flex">
-            <div className="p-2">
+            <div className="p-2" onClick={() => handleProfile()}>
               {userImage ? (
                 <img
                   src={`${process.env.IMG_BACKEND_URL}${userImage}`}
@@ -36,12 +39,9 @@ export default function Navbar(props) {
                 />
               )}
             </div>
-            <div className={`p-2 ${styles.breakPoint}`}>
+            <div className={`p-2 ${styles.breakPoint} text-center`}>
               <p className={styles.userName}>{userName}</p>
-              <p className={styles.userPhone}>{userPhone}</p>
-            </div>
-            <div className="p-2 mt-2">
-              <i className="bi bi-bell" style={{ fontSize: "22px" }}></i>
+              <p className={styles.userPhone}>+62 {userPhone}</p>
             </div>
           </div>
         </div>

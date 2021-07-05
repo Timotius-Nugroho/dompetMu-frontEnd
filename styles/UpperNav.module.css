@@ -2,12 +2,31 @@
   border-radius: 10px;
 }
 
-.navText {
-  font-size: 13px;
-  font-weight: 600;
-}
-
 .selectedNav {
   border-bottom: 3px solid #6379f4;
   color: #6379f4;
+}
+
+@media (max-width: 575.98px) {
+  .menu {
+    font-size: 100%;
+  }
+
+  .navText {
+    font-size: 13px;
+    font-weight: 600;
+    display: none;
+  }
+}
+
+@media (min-width: 576px) {
+  .menu {
+    font-size: 25px;
+  }
+
+  .navText {
+    font-size: 13px;
+    font-weight: 600;
+    display: inline;
+  }
 }

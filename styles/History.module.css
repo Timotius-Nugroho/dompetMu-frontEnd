@@ -15,6 +15,11 @@
   color: #7a7886;
 }
 
+.status {
+  font-size: 10px;
+  color: #c29239;
+}
+
 .miniTitle {
   font-weight: 700;
   font-size: 17px;
