@@ -174,7 +174,7 @@ export default function Transfer(props) {
                 <input
                   type="email"
                   className={`form-control mt-2 mb-4 ${styles.input}`}
-                  placeholder="Search receiver here"
+                  placeholder="Search receiver here (by phone number)"
                   onChange={(event) => {
                     setSearch(event.target.value);
                   }}
