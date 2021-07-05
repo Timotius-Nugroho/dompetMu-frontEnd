@@ -46,6 +46,8 @@ export default function AddPin(props) {
       });
   };
 
+  const activeButton = one && two && three && four && five && six && true;
+
   return (
     <Layout title="AddPin">
       <div className="container-fluid">
@@ -167,7 +169,9 @@ export default function AddPin(props) {
               <div className="d-grid gap-2 mt-5 pt-2">
                 <button
                   type="submit"
-                  className={`${styles.btn} btn btn-primary`}
+                  className={`${
+                    activeButton ? styles.btnActive : styles.btn
+                  } btn btn-primary`}
                 >
                   Confirm
                 </button>

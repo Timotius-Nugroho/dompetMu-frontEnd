@@ -264,12 +264,12 @@ export default function Landing(props) {
                     className={styles.pp}
                   />
                 </div>
-                <div className={styles.lable}>Alex Hansinburg</div>
+                <div className={styles.lable}>Squidward Tentacles</div>
                 <div
                   className={`${styles.semi} mb-4`}
                   style={{ fontWeight: "600" }}
                 >
-                  Designer
+                  Cashier
                 </div>
                 <div
                   className={`${styles.semi} mx-auto`}
@@ -289,19 +289,19 @@ export default function Landing(props) {
               >
                 <div className="mb-3">
                   <Image
-                    src="/squid.jpg"
+                    src="/krabs.png"
                     alt="-"
                     width={90}
                     height={90}
                     className={styles.pp}
                   />
                 </div>
-                <div className={styles.lable}>Alex Hansinburg</div>
+                <div className={styles.lable}>Eugene H. Krabs</div>
                 <div
                   className={`${styles.semi} mb-4`}
                   style={{ fontWeight: "600" }}
                 >
-                  Designer
+                  Businessman
                 </div>
                 <div
                   className={`${styles.semi} mx-auto`}
@@ -321,19 +321,19 @@ export default function Landing(props) {
               >
                 <div className="mb-3">
                   <Image
-                    src="/squid.jpg"
+                    src="/plank.jpg"
                     alt="-"
                     width={90}
                     height={90}
                     className={styles.pp}
                   />
                 </div>
-                <div className={styles.lable}>Alex Hansinburg</div>
+                <div className={styles.lable}>Sheldon J. Plankton</div>
                 <div
                   className={`${styles.semi} mb-4`}
                   style={{ fontWeight: "600" }}
                 >
-                  Designer
+                  Scientist
                 </div>
                 <div
                   className={`${styles.semi} mx-auto`}
@@ -393,26 +393,25 @@ export default function Landing(props) {
           banking needs with one single app.
         </div>
         <hr style={{ color: "white" }} />
-        <div className="d-flex justify-content-between">
+        <div className="row">
           <div
-            className={`${styles.semi}`}
+            className={`${styles.semi} col-sm-4`}
             style={{ color: "rgba(239, 239, 239, 0.75)", fontSize: "13px" }}
           >
             2021 DompetMu. All right reserved.
           </div>
-          <div className="d-flex">
-            <div
-              className={`${styles.semi} m-1`}
-              style={{ color: "rgba(239, 239, 239, 0.75)", fontSize: "13px" }}
-            >
-              +62 5637 8882 9901
-            </div>
-            <div
-              className={`${styles.semi} m-1`}
-              style={{ color: "rgba(239, 239, 239, 0.75)", fontSize: "13px" }}
-            >
-              contact@dompetmu.com
-            </div>
+          <div className="col"></div>
+          <div
+            className={`${styles.semi} col-sm-2 text-md-end`}
+            style={{ color: "rgba(239, 239, 239, 0.75)", fontSize: "13px" }}
+          >
+            +62 5637 8882 9901
+          </div>
+          <div
+            className={`${styles.semi} col-sm-3 text-md-end`}
+            style={{ color: "rgba(239, 239, 239, 0.75)", fontSize: "13px" }}
+          >
+            contact @dompetmu.com
           </div>
         </div>
       </footer>

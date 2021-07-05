@@ -29,6 +29,20 @@
   height: 52px;
 }
 
+.btnActive {
+  height: 50px;
+  border-radius: 15px;
+  background-color: rgba(99, 121, 244, 1);
+  color: white;
+  font-weight: bold;
+  border: none;
+}
+
+.btnActive:hover {
+  background-color: rgba(99, 121, 244, 1);
+  height: 52px;
+}
+
 .banner {
   width: 60%;
 }

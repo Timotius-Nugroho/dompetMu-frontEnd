@@ -6,7 +6,7 @@ import UpperNav from "components/module/UpperNav";
 import Footer from "components/module/Footer";
 import styles from "styles/TopUp.module.css";
 import { authPage } from "middleware/authorizationPage";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Cookie from "js-cookie";
 
 import { connect } from "react-redux";
@@ -37,23 +37,39 @@ function TopUp(props) {
   const [showAlertModal, setShowAlertModal] = useState([false, ""]);
   const [amount, setAmount] = useState("");
 
+  useEffect(() => {
+    axios.setToken(Cookie.get("token"));
+  }, []);
+
   const handleTopUp = (event) => {
     event.preventDefault();
-    props
-      .topUp(token, { transactionMethod: "Instant", transactionAmount: amount })
+    axios.axiosApiIntances
+      .post("transaction/topup", { transactionAmount: amount })
       .then((res) => {
-        setShowAlertModal([true, res.value.data.msg]);
+        console.log(res.data.data.redirectUrl);
+        window.open(res.data.data.redirectUrl, "_blank");
         setTimeout(() => {
-          setShowAlertModal([false, ""]);
           setShowModal(false);
         }, 2000);
       })
       .catch((err) => {
-        setShowAlertModal([true, err.response.data.msg]);
-        setTimeout(() => {
-          setShowAlertModal([false, ""]);
-        }, 3000);
+        console.log(err.response.data.msg);
       });
+    // props
+    //   .topUp(token, { transactionMethod: "Instant", transactionAmount: amount })
+    //   .then((res) => {
+    //     setShowAlertModal([true, res.value.data.msg]);
+    //     setTimeout(() => {
+    //       setShowAlertModal([false, ""]);
+    //       setShowModal(false);
+    //     }, 2000);
+    //   })
+    //   .catch((err) => {
+    //     setShowAlertModal([true, err.response.data.msg]);
+    //     setTimeout(() => {
+    //       setShowAlertModal([false, ""]);
+    //     }, 3000);
+    //   });
   };
 
   // console.log(props);

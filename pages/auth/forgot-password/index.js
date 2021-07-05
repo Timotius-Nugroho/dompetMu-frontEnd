@@ -221,7 +221,15 @@ function Forgot(props) {
               <div className="d-grid gap-2 mt-5">
                 <button
                   type="submit"
-                  className={`${styles.btn} btn btn-primary`}
+                  className={`${
+                    !accountFound
+                      ? userEmail
+                        ? styles.btnActive
+                        : styles.btn
+                      : newPassword.length > 0 && confirmPassword.length > 0
+                      ? styles.btnActive
+                      : styles.btn
+                  } btn btn-primary`}
                 >
                   {accountFound ? "Reset Password" : "Confirm"}
                 </button>

@@ -59,6 +59,7 @@ export default function Login(props) {
     router.push("/forgot-password");
   };
 
+  const activeButton = form.userEmail && form.userPassword && true;
   return (
     <Layout title="Login">
       <div className="container-fluid">
@@ -178,7 +179,9 @@ export default function Login(props) {
               <div className="d-grid gap-2 mt-5 pt-5">
                 <button
                   type="submit"
-                  className={`${styles.btn} btn btn-primary`}
+                  className={`${
+                    activeButton ? styles.btnActive : styles.btn
+                  } btn btn-primary`}
                 >
                   Login
                 </button>

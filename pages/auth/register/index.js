@@ -53,6 +53,10 @@ export default function Register() {
     router.push("/login");
   };
 
+  let activeButton = true;
+  for (const field in form) {
+    activeButton = activeButton && form[field] && true;
+  }
   return (
     <Layout title="Register">
       <div className="container-fluid">
@@ -177,6 +181,9 @@ export default function Register() {
                       className="bi bi-telephone"
                       style={{ color: "grey" }}
                     ></i>
+                    <span className={styles.semi} style={{ fontSize: "10px" }}>
+                      +62
+                    </span>
                   </span>
                   <input
                     type="text"
@@ -239,7 +246,9 @@ export default function Register() {
               <div className="d-grid gap-2 mt-3 pt-5">
                 <button
                   type="submit"
-                  className={`${styles.btn} btn btn-primary`}
+                  className={`${
+                    activeButton ? styles.btnActive : styles.btn
+                  } btn btn-primary`}
                 >
                   Register
                 </button>

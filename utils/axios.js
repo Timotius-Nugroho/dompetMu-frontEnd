@@ -33,7 +33,7 @@ axiosApiIntances.interceptors.response.use(
       try {
         Cookie.remove("token");
         Cookie.remove("user");
-        alert("Please log in !");
+        alert("Please log in with verified account !");
         window.location.href = "/";
       } catch (err) {
         console.log(err.message);
