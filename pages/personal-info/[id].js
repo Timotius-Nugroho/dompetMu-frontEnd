@@ -16,7 +16,7 @@ export async function getStaticPaths() {
     })
     .catch((err) => {
       console.log(err.response);
-      return {};
+      return [];
     });
   // console.log(users);
 
