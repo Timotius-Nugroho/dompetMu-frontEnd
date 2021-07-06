@@ -38,7 +38,7 @@ export default function Login(props) {
           if (res.data.data.user_pin > 0) {
             router.push("/");
           } else {
-            router.push("/addpin");
+            router.push("/auth/addpin");
           }
         }, 2000);
       })
