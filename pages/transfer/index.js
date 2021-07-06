@@ -212,7 +212,7 @@ export default function Transfer(props) {
                                 {item.user_name}
                               </div>
                               <div className={`${styles.type} ms-3`}>
-                                {item.user_phone}
+                                +62 {item.user_phone}
                               </div>
                             </div>
                           </div>
