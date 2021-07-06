@@ -17,9 +17,11 @@ export default function Login(props) {
   const [form, setForm] = useState({ userEmail: "", userPassword: "" });
   const [showPassword, setShowPassword] = useState(false);
   const [showAlert, setShowAlert] = useState([false, ""]);
+  const [loader, setLoader] = useState(false);
 
   const handleLogin = (event) => {
     event.preventDefault();
+    setLoader(true);
     axios.axiosApiIntances
       .post("auth/login", form)
       .then((res) => {
@@ -27,6 +29,7 @@ export default function Login(props) {
         setShowAlert([true, res.data.msg]);
         setTimeout(() => {
           setShowAlert([false, ""]);
+          setLoader(false);
           Cookie.set("token", res.data.data.token, {
             expires: 1,
             secure: true,
@@ -40,9 +43,10 @@ export default function Login(props) {
           } else {
             router.push("/auth/addpin");
           }
-        }, 2000);
+        }, 1000);
       })
       .catch((error) => {
+        setLoader(false);
         // console.log("errr", error.response.data.msg);
         setShowAlert([true, error.response.data.msg]);
         setTimeout(() => {
@@ -183,7 +187,18 @@ export default function Login(props) {
                     activeButton ? styles.btnActive : styles.btn
                   } btn btn-primary`}
                 >
-                  Login
+                  {loader ? (
+                    <div className="text-center">
+                      <div
+                        className="spinner-border spinner-border-sm text-primary"
+                        role="status"
+                      >
+                        <span className="visually-hidden">Loading...</span>
+                      </div>
+                    </div>
+                  ) : (
+                    "Login"
+                  )}
                 </button>
               </div>
             </form>

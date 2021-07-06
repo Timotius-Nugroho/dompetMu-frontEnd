@@ -22,8 +22,10 @@ export default function Register() {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showAlert, setShowAlert] = useState([false, ""]);
+  const [loader, setLoader] = useState(false);
 
   const handleRegister = (event) => {
+    setLoader(true);
     event.preventDefault();
     axios.axiosApiIntances
       .post("auth/register", {
@@ -36,12 +38,14 @@ export default function Register() {
         // console.log("axios", res);
         setShowAlert([true, res.data.msg]);
         setTimeout(() => {
+          setLoader(false);
           setShowAlert([false, ""]);
           router.push("/login");
-        }, 2000);
+        }, 1000);
       })
       .catch((error) => {
         // console.log("errr", error.response.data.msg);
+        setLoader(false);
         setShowAlert([true, error.response.data.msg]);
         setTimeout(() => {
           setShowAlert([false, ""]);
@@ -250,7 +254,18 @@ export default function Register() {
                     activeButton ? styles.btnActive : styles.btn
                   } btn btn-primary`}
                 >
-                  Register
+                  {loader ? (
+                    <div className="text-center">
+                      <div
+                        className="spinner-border spinner-border-sm text-primary"
+                        role="status"
+                      >
+                        <span className="visually-hidden">Loading...</span>
+                      </div>
+                    </div>
+                  ) : (
+                    "Register"
+                  )}
                 </button>
               </div>
             </form>
