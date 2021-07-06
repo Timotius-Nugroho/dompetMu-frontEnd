@@ -88,7 +88,7 @@ export default function Landing(props) {
           <div>For Saving Time</div>
         </div>
         <div className={`${styles.mini} mt-5 mb-5`}>
-          <div>We bring you a mobile app for banking problems</div>
+          <div>We bring you a web app for banking problems</div>
           <div>that oftenly wasting much of your times.</div>
         </div>
         <button
