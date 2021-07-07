@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <>
       <footer style={{ backgroundColor: "#6379F4" }} className="pt-2 pb-2">
-        <div className="container-fluid">
+        <div className="container">
           <div className="row">
             <div className={`${styles.footerText} col-sm-4`}>
               2021 DompetMu. All right reserved.

@@ -18,7 +18,7 @@ export default function Navbar(props) {
         className="navbar navbar-expand-lg fixed-top shadow"
         style={{ backgroundColor: "white" }}
       >
-        <div className="container-fluid">
+        <div className="container">
           <div className={`${styles.brand} navbar-brand`} href="#">
             DompetMu
           </div>
