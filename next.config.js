@@ -2,9 +2,8 @@ module.exports = {
   env: {
     APP_NAME: "DompetMu",
     NEXT_PUBLIC_BACKEND_URL:
-      "https://pacific-bastion-76713.herokuapp.com/backend4/api/v1/",
-    IMG_BACKEND_URL:
-      "https://pacific-bastion-76713.herokuapp.com/backend4/api/",
+      "https://dompetmu-api.herokuapp.com/backend4/api/v1/",
+    IMG_BACKEND_URL: "https://dompetmu-api.herokuapp.com/backend4/api/",
   },
   async rewrites() {
     return [
